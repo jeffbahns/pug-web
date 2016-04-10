@@ -1,0 +1,11 @@
+<% if(rs.length > 0) { %>
+Title: <%= rs[0].movie_title %>
+<ul>
+    <% for(var i=0; i < rs.length; i++) {%>
+        <li><%= rs[i].title %></li>
+
+    <% } %>
+</ul>
+<% } else { %>
+No movie matched movie id <%= movie_id %>.
+<% } %>

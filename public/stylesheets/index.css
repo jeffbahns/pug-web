@@ -1,0 +1,30 @@
+#header {
+    background-color:firebrick;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+#nav {
+    line-height:30px;
+    background-color:lightgrey;
+    height:400px;
+    width:200px;
+    float:left;
+    padding:5px;
+}
+#content {
+    width:350px;
+    float:left;
+    padding:10px;
+}
+#footer {
+    background-color:firebrick;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
