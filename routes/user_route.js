@@ -5,7 +5,7 @@ var userDal = require('../model/user_dal');
 router.get('/all', function(req, res) {
     userDal.GetAll(function (err, result) {
             if (err) throw err;
-            res.render('displayAllUsers.ejs', {rs: result});
+            res.render('user/displayAllUsers.ejs', {rs: result});
         }
     );
 });
@@ -14,13 +14,13 @@ router.get('/', function (req, res) {
     userDal.GetByID(req.query.user_id, function (err, result) {
             if (err) throw err;
 
-            res.render('displayUserRatings.ejs', {rs: result, user_id: req.query.user_id});
+            res.render('user/displayUserRatings.ejs', {rs: result, user_id: req.query.user_id});
         }
     );
 });
 
 router.get('/create', function(req, res, next) {
-    res.render('userFormCreate.ejs');
+    res.render('user/userFormCreate.ejs');
 });
 
 router.get('/save', function(req, res, next) {
