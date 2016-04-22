@@ -1,0 +1,18 @@
+<% include ../partials/header.ejs %>
+
+<div class="container">
+
+    <h3><%= rs[0].CourtName %></h3>
+    <p>
+        <%= rs[0].Address %><br>
+        <%= rs[0].City%><br>
+        <%= rs[0].State %><br>
+        <%= rs[0].ZipCode %><br>
+    </p>
+
+    <h4>Court Schedule</h4>
+
+    <button type="button" class="btn btn-primary">Create New Game</button>
+</div>
+
+<% include ../partials/footer.ejs %>

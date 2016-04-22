@@ -1,60 +1,8 @@
-  <% include partials/header %>
-  <% include partials/nav %>
-  <div id="content">
-      <table>
-        <tr>
-          <th>Number</th>
-          <th>Name</th>
-          <th>Professor</th>
-        </tr>
-        <tr>
-          <td>POLS200</td>
-          <td>American Political System</td>
-          <td>Gouveia</td>
-        </tr>
-        <tr>
-          <td>CS210</td>
-          <td>Introduction To Unix</td>
-          <td>Yost</td>
-        </tr>
-        <tr>
-          <td>CS351</td>
-          <td>Computer Architecture</td>
-          <td>Rivoire</td>
-        </tr>
-        <tr>
-          <td>CS355</td>
-          <td>Database Design</td>
-          <td>Haderman</td>
-        </tr>
-        <tr>
-          <td>CS385</td>
-          <td>Parallel Computing</td>
-          <td>Rountree</td>
-        </tr>
-      </table>
+<% include partials/header.ejs %>
 
-      Top 3 things I've learned:
-        <ol>
-          <li>SQL</li>
-          <li>Android Development</li>
-          <li>Python</li>
-        </ol>
+<div class="container">
+    <a href="/game/all">Display All Games</a>
+</div>
 
-      Three things I want to learn:
-        <ul>
-          <li>CSS</li>
-          <li>Javascript</li>
-          <li>IOS</li>
-        </ul>
-    <button type="button" onClick="buttonClick()">Click me, or else</button>
-    <script>
-      function buttonClick() {
-        confirm("Why did you click me?");
-      }
-    </script>
 
-  </div>
-
-  <% include partials/footer %>
-
+<% include partials/footer.ejs %>

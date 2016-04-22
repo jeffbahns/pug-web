@@ -1,0 +1,16 @@
+<% include ../partials/header.ejs %>
+
+<div class="container">
+    <% if(rs.length > 0) { %>
+
+    <h3><%= rs[0].Username %></h3>
+    <p>
+        Age: <%= rs[0].Age %><br>
+        Phone: (<%= rs[0].PhoneNumber.substr(0, 3) %>)
+        <%= rs[0].PhoneNumber.substr(3, 3) %> -
+        <%= rs[0].PhoneNumber.substr(6, 3) %>
+    </p>
+    <% } %>
+</div>
+
+<% include ../partials/footer.ejs %>

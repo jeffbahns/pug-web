@@ -1,0 +1,46 @@
+<% include ../partials/header.ejs %>
+
+<div class="container">
+
+    <h2>Games</h2>
+
+    <% if(rs.length > 0) { %>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th><!--Join game spacer, for now--></th>
+            </tr>
+        </thead>
+        <% for (var i=0; rs.length > i; i++) { %>
+        <tbody>
+            <tr>
+                <td>
+                    <%= rs[i].CourtName %>
+                </td>
+                <td>
+                    <a href="/game/?GameID=<%=rs[i].GameID%>"><%= rs[i].GameName %></a>
+                </td>
+                <td>
+                    <%= rs[i].GameDateTime.substr(4, 2) %> /
+                    <%= rs[i].GameDateTime.substr(6, 2) %> /
+                    <%= rs[i].GameDateTime.substr(0, 4) %>
+                </td>
+                <td>
+                    <a href="#" type="button" class="btn btn-primary">Join Game</a>
+                </td>
+            </tr>
+        </tbody>
+        <% } %>
+    </table>
+
+    <% } else { %>
+    No movies exist.
+    <% } %>
+
+    <button type="button" class="btn btn-primary">Create New Game</button>
+</div>
+
+<% include ../partials/footer.ejs %>

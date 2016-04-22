@@ -1,0 +1,32 @@
+<% include ../partials/header.ejs %>
+
+<div class="container">
+
+    <h2>Courts</h2>
+
+    <% if(rs.length > 0) { %>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Court Name</th>
+                <th>City</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <% for (var i=0; rs.length > i; i++) { %>
+        <tbody>
+            <tr>
+                <td><a href="/court/?CourtID=<%= rs[i].CourtID %>"><%= rs[i].CourtName %></a></td>
+                <td><%= rs[i].City %></td>
+                <td><%= rs[i].State %></td>
+            </tr>
+        </tbody>
+        <% } %>
+    </table>
+
+    <% } else { %>
+    No courts exist.
+    <% } %>
+    <button type="button" class="btn btn-primary">Create New Court</button></div>
+
+<% include ../partials/footer.ejs %>

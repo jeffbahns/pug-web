@@ -1,0 +1,43 @@
+<% include ../partials/header.ejs %>
+
+<div class="container">
+    <% if(rs.length > 0) { %>
+
+    <h3><%= rs[0].GameName %></h3>
+    <div class="well">
+    <p>
+        Time: <%= rs[0].GameDateTime.substr(8, 4) %><br>
+        Date: <%= rs[0].GameDateTime.substr(4, 2) %> /
+        <%= rs[0].GameDateTime.substr(6, 2) %> /
+        <%= rs[0].GameDateTime.substr(0, 4) %><br>
+        Duration: <%= rs[0].GameDuration %> hour(s)
+    </p>
+    </div>
+
+    <h3>Location</h3>
+    <div class="well">
+    <p><%= rs[0].CourtName %></p>
+    <p>
+        <%= rs[0].Address %><br>
+        <%= rs[0].City %><br>
+        <%= rs[0].State %><br>
+        <%= rs[0].ZipCode %>
+    </p>
+    </div>
+
+    <h3>Players</h3>
+    <div class="well">
+        <% for(var i=0; rs.length > i; i++) { %>
+        <p>
+            <a href="/player/?PlayerID=<%= rs[i].PlayerID %>"><%= rs[i].Username %><br></a>
+        </p>
+        <% } %>
+    </div>
+
+    <button type="button" class="btn btn-primary">Join Game</button>
+    <% } else { %>
+    No games exist.
+    <% } %>
+</div>
+
+<% include ../partials/footer.ejs %>
