@@ -16,7 +16,7 @@
 
     <h3>Location</h3>
     <div class="well">
-    <p><%= rs[0].CourtName %></p>
+    <p><a href="/court/?CourtID=<%= rs[0].CourtID %>"><%= rs[0].CourtName %></a></p>
     <p>
         <%= rs[0].Address %><br>
         <%= rs[0].City %><br>

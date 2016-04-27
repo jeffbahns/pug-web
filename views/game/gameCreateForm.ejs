@@ -1,3 +1,30 @@
 <% include ../partials/header.ejs %>
 
+<div class="container">
+    <h2>Create New Game</h2>
+    <form role="form" action="/game/save/">
+        <div class="form-group">
+            <label for="GameName">Game Title:</label>
+            <input type="text" class="form-control" id="GameName" name="GameName">
+        </div>
+        <div class="form-group">
+            <label for="GameDateTime">Date and Time:</label>
+            <input type="text" class="form-control" id="GameDateTime" name="GameDateTime">
+        </div>
+        <div class="form-group">
+            <label for="GameDuration">Game Duration:</label>
+            <input type="text" class="form-control" id="GameDuration" name="GameDuration">
+        </div>
+        <div class="form-group">
+            <label for="CourtID">Court ID:</label>
+            <input type="text" class="form-control" id="CourtID" name="CourtID">
+        </div>
+        <div class="form-group">
+            <label for="SkillLevel">Skill Level:</label>
+            <input type="text" class="form-control" id="SkillLevel" name="SkillLevel">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+
 <% include ../partials/footer.ejs %>

@@ -1,46 +1,62 @@
 <% include ../partials/header.ejs %>
 
 <div class="container">
-
+    <% function timeFormatter(time_24hr) { %>
+    <%      h = time_24hr.substr(0, 2) % 12; %>
+    <%      h = (time_24hr == 0)? 12 : h %>
+    <%      m = time_24hr.substr(2, 2) %>
+    <%      suffix = (time_24hr.substr(0,2) >= 12)? 'PM' : 'AM'; %>
+    <%      return h + ":" + m + suffix; %>
+    <% } %>
     <h2>Games</h2>
 
-    <% if(rs.length > 0) { %>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Location</th>
-                <th>Title</th>
-                <th>Date</th>
-                <th><!--Join game spacer, for now--></th>
-            </tr>
-        </thead>
-        <% for (var i=0; rs.length > i; i++) { %>
-        <tbody>
-            <tr>
-                <td>
-                    <%= rs[i].CourtName %>
-                </td>
-                <td>
-                    <a href="/game/?GameID=<%=rs[i].GameID%>"><%= rs[i].GameName %></a>
-                </td>
-                <td>
-                    <%= rs[i].GameDateTime.substr(4, 2) %> /
-                    <%= rs[i].GameDateTime.substr(6, 2) %> /
-                    <%= rs[i].GameDateTime.substr(0, 4) %>
-                </td>
-                <td>
-                    <a href="#" type="button" class="btn btn-primary">Join Game</a>
-                </td>
-            </tr>
-        </tbody>
-        <% } %>
-    </table>
+    <div class="row">
+        <div class="col-sm-4">
+            Local games are listed here<br><br>
+            You can create new games or join currently listed onces
+        </div>
+        <div class="col-sm-8">
+            <% if(rs.length > 0) { %>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th><!--Join game spacer, for now--></th>
+                    </tr>
+                </thead>
+                <% for (var i=0; rs.length > i; i++) { %>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="/game/?GameID=<%=rs[i].GameID%>"><%= rs[i].GameName %></a>
+                        </td>
+                        <td>
+                            <a href="/court/?CourtID=<%= rs[i].CourtID %>"><%= rs[i].CourtName %></a>
+                        </td>
+                        <td>
+                            <%= rs[i].GameDateTime.substr(4, 2) %> /
+                            <%= rs[i].GameDateTime.substr(6, 2) %> /
+                            <%= rs[i].GameDateTime.substr(0, 4) %><br>
+                            <%= timeFormatter(rs[i].GameDateTime.substr(8, 4)) %>
+                        </td>
+                        <td>
+                            <a href="#" type="button" class="btn btn-primary">Join Game</a>
+                        </td>
+                    </tr>
+                </tbody>
+                <% } %>
+            </table>
 
-    <% } else { %>
-    No movies exist.
-    <% } %>
+            <% } else { %>
+            No movies exist.
+            <% } %>
+            <a href="/game/create" type="button" class="btn btn-primary">Create New Game</a>
+        </div>
+    </div>
 
-    <button type="button" class="btn btn-primary">Create New Game</button>
+
 </div>
 
 <% include ../partials/footer.ejs %>

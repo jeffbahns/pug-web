@@ -32,13 +32,32 @@ exports.GetAllWithCourts = function(callback) {
 
 exports.GetByID = function(GameID, callback) {
     query = 'SELECT * FROM game\n'
-    + 'JOIN court ON court.CourtID = game.CourtID\n'
-    + 'JOIN player_in_game ON player_in_game.GameID = game.GameID\n'
-    + 'JOIN player ON player.PlayerID = player_in_game.PlayerID\n'
+    + 'LEFT JOIN court ON court.CourtID = game.CourtID\n'
+    + 'LEFT JOIN player_in_game ON player_in_game.GameID = game.GameID\n'
+    + 'LEFT JOIN player ON player.PlayerID = player_in_game.PlayerID\n'
     + 'WHERE game.GameID = ' + GameID + ';';
     connection.query(query,
         function(err, result) {
-            if (err) {
+            if(err) {
+                console.log(err);
+                callback(true);
+                return;
+            }
+            console.log(result);
+            callback(false, result);
+        });
+};
+
+exports.Insert = function(game_info, callback) {
+    query = 'INSERT INTO game(GameDateTime, GameName, GameDuration, SkillLevel, CourtID) VALUES (' +
+    '\'' + game_info.GameDateTime + '\', ' +
+    '\'' + game_info.GameName + '\', ' +
+    game_info.GameDuration + ', ' +
+    '\'' + game_info.SkillLevel + '\', ' +
+    game_info.CourtID + ')';
+    connection.query(query,
+        function(err, result) {
+            if(err) {
                 console.log(err);
                 callback(true);
                 return;

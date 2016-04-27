@@ -1,16 +1,15 @@
 <% include ../partials/header.ejs %>
 
 <div class="container">
-    <% if(rs.length > 0) { %>
-
     <h3><%= rs[0].Username %></h3>
     <p>
+        Name: <%= rs[0].FirstName %> <%= rs[0].LastName %><br>
         Age: <%= rs[0].Age %><br>
         Phone: (<%= rs[0].PhoneNumber.substr(0, 3) %>)
         <%= rs[0].PhoneNumber.substr(3, 3) %> -
-        <%= rs[0].PhoneNumber.substr(6, 3) %>
+        <%= rs[0].PhoneNumber.substr(6, 4) %>
     </p>
-    <% } %>
+    <button type="button" class="btn btn-primary">Add Friend</button>
 </div>
 
 <% include ../partials/footer.ejs %>
