@@ -1,0 +1,12 @@
+body {
+    margin-top: 100px;
+    margin-bottom: 0px;
+    background: none;
+}
+.full {
+    background: url('../img/basketball-wide.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}

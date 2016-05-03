@@ -7,7 +7,7 @@ router.get('/all', function(req, res) {
        if(err) {
            throw err;
        }
-       res.render('court/courtDisplayAll.ejs', {rs: result});
+       load_user_and_render(req, res, 'court/courtDisplayAll.ejs', {rs: result});
    });
 });
 
@@ -16,8 +16,24 @@ router.get('/', function(req, res) {
        if(err) {
            throw err;
        }
-       res.render('court/courtDisplayInfo.ejs', {rs: result, CourtID: req.query.CourtID});
+       load_user_and_render(req, res, 'court/courtDisplayInfo.ejs', {rs: result, CourtID: req.query.CourtID});
    });
 });
+
+function load_user_and_render(req, res, shit_to_load, extra_shit) {
+    var data = {
+        title : 'Express'
+    };
+    extra_shit.data = data;
+    if(req.session.account === undefined) {
+        res.render(shit_to_load, {data: data});
+    }
+
+    else {
+        data.first_name = req.session.account.FirstName;
+        data.last_name = req.session.account.LastName;
+        res.render(shit_to_load, extra_shit);
+    }
+}
 
 module.exports = router;

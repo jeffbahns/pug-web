@@ -28,3 +28,18 @@ exports.GetByID = function(PlayerID, callback) {
             callback(false, result);
         });
 };
+
+exports.JoinGame = function(PlayerID, GameID, callback) {
+    query = 'INSERT INTO player_in_game(PlayerID, GameID) VALUES (?, ?)';
+    query_data = [PlayerID, GameID];
+    console.log(query, query_data);
+    connection.query(query, query_data, function(err, result) {
+        if(err) {
+            console.log(err);
+            callback(err, null);
+        }
+        else {
+            callback(false, result);
+        }
+    });
+};

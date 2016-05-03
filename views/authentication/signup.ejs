@@ -1,0 +1,42 @@
+<% var js_includes = ['https://code.jquery.com/jquery-1.12.3.min.js', '/javascripts/signup_ajax.js']%>
+<% include ../partials/header.ejs %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4p">
+
+        </div>
+        <div class="col-sm-4">
+            <form role="form">
+                <div class="form-group">
+                    <label for="Username">Username:</label>
+                    <input type="text" class="form-control" id="Username" placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" id="Password" placeholder="Enter password">
+                </div>
+                <div class="form-group">
+                    <label for="FirstName">First Name:</label>
+                    <input type="text" class="form-control" id="FirstName" placeholder="Enter first name">
+                </div>
+                <div class="form-group">
+                    <label for="LastName">Last Name:</label>
+                    <input type="text" class="form-control" id="LastName" placeholder="Enter last name">
+                </div>
+                <div class="form-group">
+                    <label for="PhoneNumber">Phone Number:</label>
+                    <input type="text" class="form-control" id="PhoneNumber" placeholder="Enter phone number">
+                </div>
+                <div class="form-group">
+                    <label for="Age">Age:</label>
+                    <input type="text" class="form-control" id="Age" placeholder="Enter age">
+                </div>
+                <p><a href="/login">Already have an account?</a></p>
+                <button type="submit" id="signup" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer.ejs %>

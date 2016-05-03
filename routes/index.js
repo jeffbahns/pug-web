@@ -1,25 +1,78 @@
 var express = require('express');
 var router = express.Router();
+accountDal = require('../model/account_dal');
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index.ejs', { title: 'CS355', subtitle: 'Lab 8' });
+    load_user_and_render(req, res, 'index.ejs');
 });
 
 router.get('/about', function(req, res, next) {
-    res.render('about.ejs');
-});
+    load_user_and_render(req, res, 'about.ejs');
 
-router.get('/home', function(req, res, next) {
-    res.render('index.ejs');
 });
 
 router.get('/login', function(req, res) {
-    res.render('login.ejs');
+    load_user_and_render(req,res, 'authentication/login.ejs');
+});
+
+router.get('/authenticate', function(req, res) {
+    console.log(req.query);
+    accountDal.GetByUsername(req.query.Username, req.query.Password, function(err, account) {
+        response = {};
+        if (err) {
+            response.message = err.message;
+        }
+        else if (account == null) {
+            response.message = "Account not found";
+        }
+        else {
+            req.session.account = account;
+            response.message = "You are now logged in";
+        }
+        res.json(response);
+    });
+});
+router.get('/logout', function(req, res) {
+    req.session.destroy( function(err) {
+        var data = {
+            title : 'Express'
+        };
+        res.render('authentication/logout.ejs', {data: data});
+    });
 });
 
 router.get('/signup', function(req, res) {
-   res.render('signup.ejs');
+    load_user_and_render(req, res, 'authentication/signup.ejs');
 });
+router.get('/save', function(req, res) {
+    console.log(req.query);
+    accountDal.InsertNewUser(req.query.Username, req.query.Password, req.query.FirstName,
+    req.query.LastName, req.query.PhoneNumber, req.query.Age, function(err, result) {
+            response = {};
+            if (err) {
+                response.message = err.message;
+            }
+            else {
+                response.message = "You have signed up";
+            }
+            res.json(response);
+        });
+});
+
+function load_user_and_render(req, res, shit_to_load) {
+    var data = {
+        title : 'Express'
+    };
+    if(req.session.account === undefined) {
+        res.render(shit_to_load, {data: data});
+    }
+
+    else {
+        data.first_name = req.session.account.FirstName;
+        data.last_name = req.session.account.LastName;
+        data.player_id = req.session.account.PlayerID;
+        res.render(shit_to_load, {data: data});
+    }
+}
 
 module.exports = router;

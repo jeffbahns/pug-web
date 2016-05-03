@@ -1,9 +1,11 @@
+<% var js_includes = ['https://code.jquery.com/jquery-1.12.3.min.js', '/javascripts/join_game_ajax.js']%>
 <% include ../partials/header.ejs %>
 
 <div class="container">
     <% if(rs.length > 0) { %>
 
     <h3><%= rs[0].GameName %></h3>
+
     <div class="well">
     <p>
         Time: <%= rs[0].GameDateTime.substr(8, 4) %><br>
@@ -34,7 +36,16 @@
         <% } %>
     </div>
 
-    <button type="button" class="btn btn-primary">Join Game</button>
+    <% for(var i=0; rs.length > i; i++) { %>
+    <%      var inGameAlready = false; %>
+    <%      if( rs[i].PlayerID == data.PlayerID ) { %>
+    <%          inGameAlready = true; %>
+    <%      }}%>
+    <% if(!inGameAlready) { %>
+    <div id="PlayerID" style="display:none"><%= data.PlayerID %></div>
+    <div id="GameID" style="display:none"><%= rs[0].GameID %></div>
+    <button type="button" id="joinGame" class="btn btn-primary">Join Game</button>
+    <% } %>
     <% } else { %>
     No games exist.
     <% } %>

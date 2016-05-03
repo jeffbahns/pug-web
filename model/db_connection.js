@@ -1,7 +1,7 @@
 exports.config = {
 
-    user: '',
-    password: '',
-    host: '',
-    database: ''
+    user: 'bahns',
+    password: '004972947',
+    host: 'blue.cs.sonoma.edu',
+    database: 'bahns'
 };

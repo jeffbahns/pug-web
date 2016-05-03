@@ -1,21 +1,35 @@
+<% var js_includes = ['https://code.jquery.com/jquery-1.12.3.min.js', '/javascripts/login_ajax.js']%>
 <% include ../partials/header.ejs %>
 
 <div class="container">
-    <div class="jumbotron" style="background-color:#c4e3f3;">
-        <h1>Sixth Man</h1>
-        <p>Find and create pick-up games with basketball players in your area</p>
+    <div class="row">
+        <div class="col-sm-4">
+
+        </div>
+        <div class="col-sm-4">
+            <% if(typeof msg !== "undefined") { %>
+            <%= msg %>
+            <% } %>
+            <form role="form">
+                <div class="form-group">
+                    <label for="Username">Email:</label>
+                    <input type="text" class="form-control" id="Username" name="Username" placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label for="Password">Password:</label>
+                    <input type="password" class="form-control" id="Password" name="Password" placeholder="Enter password">
+                </div>
+                <p>Don't have an account? <a href="/signup">Sign up</a></p>
+
+                <button type="submit" id="login" class="btn btn-default">Submit</button>
+            </form>
+
+            <div id="message" style="display:none"><h3>You are now logged in</h2></div>
+
+        </div>
+
     </div>
-    <form role="form">
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd" placeholder="Enter password">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
+
 </div>
 
 <% include ../partials/footer.ejs %>

@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var routes = require('./routes/index');
 var game = require('./routes/game_route');
@@ -23,12 +24,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session(
+    {
+        secret: 'lab11'
+    }
+));
 
 app.use('/', routes);
-
-app.use('/game', game);
-app.use('/player', player);
-app.use('/court', court);
+function restrict(req, res, next){
+    if(req.session.account) { //check if user is authenticated yet
+        next();  //user logged in so proceed to requested page
+    }
+    else {
+        req.session.originalUrl = req.originalUrl;
+        res.redirect('/login');  // they aren't so ask them to login
+    }
+}
+app.use('/game', restrict, game);
+app.use('/player', restrict, player);
+app.use('/court', restrict, court);
 
 
 // catch 404 and forward to error handler

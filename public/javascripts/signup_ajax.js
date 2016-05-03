@@ -1,0 +1,39 @@
+var signup = function() {
+
+    var payload = {
+        Username: $('#Username').val(),
+        Password: $('#Password').val(),
+        FirstName: $('#FirstName').val(),
+        LastName: $('#LastName').val(),
+        PhoneNumber: $('#PhoneNumber').val(),
+        Age: $('#Age').val()
+    };
+
+    $.ajax({
+        url: '/save',  // url where we want to send the form data
+        type: 'GET', // the type of form submission; GET or POST
+        contentType: "json",  // the type of data we are sending
+        data: payload,  // the actual data we are sending
+        complete: function(data) {  // what to do with the response back from the server
+
+            $('#message').html(data.responseJSON.message);
+            $('#message').show();
+            window.location.assign('/login');
+
+        }
+    })
+};
+
+$(document).ready(function() {
+
+    $('#signup').click(function(e) {
+        // When ddBtn is clicked this console log statement logs to your browser's console log not Node.js in Webstorm
+        console.log('login clicked');
+
+        // this prevents the form from being submitted using the non-ajax method
+        e.preventDefault();
+
+        // runs the ajax function defined above.
+        signup();
+    });
+});
