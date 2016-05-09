@@ -17,6 +17,24 @@ exports.GetAll = function(callback) {
 
 exports.GetByID = function(PlayerID, callback) {
     query = 'SELECT * FROM player WHERE PlayerID = ' + PlayerID;
+    console.log(query);
+    connection.query(query,
+        function(err, result) {
+            if(err) {
+                console.log(err);
+                callback(true);
+                return;
+            }
+            console.log(result);
+            callback(false, result);
+        });
+};
+
+exports.GetCreatorByGameID = function(GameID, callback) {
+    query = 'SELECT Username, FirstName, LastName, PlayerID FROM player\n'
+        + 'JOIN game ON game.CreatorID = player.PlayerID\n'
+        + 'WHERE game.GameID = ' + GameID + ';';
+    console.log(query);
     connection.query(query,
         function(err, result) {
             if(err) {

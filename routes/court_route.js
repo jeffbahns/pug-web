@@ -32,6 +32,8 @@ function load_user_and_render(req, res, shit_to_load, extra_shit) {
     else {
         data.first_name = req.session.account.FirstName;
         data.last_name = req.session.account.LastName;
+        data.PlayerID = req.session.account.PlayerID;
+        data.Username = req.session.account.Username;
         res.render(shit_to_load, extra_shit);
     }
 }

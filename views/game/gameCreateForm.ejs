@@ -1,8 +1,11 @@
+<% var js_includes = ['https://code.jquery.com/jquery-1.12.3.min.js', '/javascripts/create_game_ajax.js']%>
+
 <% include ../partials/header.ejs %>
 
 <div class="container">
     <h2>Create New Game</h2>
-    <form role="form" action="/game/save/">
+    <div id="message" style="display:none"><h2>Game successfully created</h2></div><br>
+    <form role="form">
         <div class="form-group">
             <label for="GameName">Game Title:</label>
             <input type="text" class="form-control" id="GameName" name="GameName">
@@ -16,15 +19,31 @@
             <input type="text" class="form-control" id="GameDuration" name="GameDuration">
         </div>
         <div class="form-group">
-            <label for="CourtID">Court ID:</label>
-            <input type="text" class="form-control" id="CourtID" name="CourtID">
+            <label for="CourtID">Select Court:</label>
+            <select class="form-control" id="CourtID">
+                <% for(var i=0; i < rs.length; i++) {%>
+                    <option value="<%= rs[i].CourtID %>">
+                        <%= rs[i].CourtName %>    -    <%= rs[i].City %>,
+                        <%= rs[i].State %>
+                    </option>
+                <% } %>
+            </select>
         </div>
         <div class="form-group">
             <label for="SkillLevel">Skill Level:</label>
-            <input type="text" class="form-control" id="SkillLevel" name="SkillLevel">
+            <select class="form-control" id="SkillLevel" name="SkillLevel">
+                <option value="C">Casual</option>
+                <option value="M">Moderate</option>
+                <option value="S">Serious</option>
+            </select>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <div class="form-group">
+            <label for="CreatorID">Creator:</label>
+            <input type="text" id="CreatorID" class="form-control" value="<%= data.PlayerID %>" placeholder="<%= data.Username %>"/>
+        </div>
+        <button type="submit" id="createGame" class="btn btn-default">Submit</button>
     </form>
+
 </div>
 
 <% include ../partials/footer.ejs %>

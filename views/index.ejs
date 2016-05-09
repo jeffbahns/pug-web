@@ -1,10 +1,17 @@
+<% var js_includes = ['https://code.jquery.com/jquery-1.12.3.min.js', '/javascripts/login_ajax.js']%>
 <% include partials/header.ejs %>
 
+
 <div class="container">
-    <div class="jumbotron" style="background-color:#67b168;">
-        <h1>Sixth Man</h1>
-        <p>Find and create pick-up games with basketball players in your area</p>
+    <% if(typeof data.first_name == "undefined") { %>
+    <div class="col-sm-8">
+        <div class="jumbotron" style="background-color:#67b168;">
+            <h1>Sixth Man</h1>
+            <p>Find and create pick-up games with basketball players in your area</p>
+        </div>
     </div>
+    <% include partials/login_partial.ejs %>
+    <% } %>
 </div>
 
 <% include partials/footer.ejs %>

@@ -6,27 +6,14 @@
         <div class="col-sm-4">
 
         </div>
+
+        <% if(typeof data.first_name == "undefined") { %>
+            <% include ../partials/login_partial.ejs %>
+        <% } else { %>
         <div class="col-sm-4">
-            <% if(typeof msg !== "undefined") { %>
-            <%= msg %>
-            <% } %>
-            <form role="form">
-                <div class="form-group">
-                    <label for="Username">Email:</label>
-                    <input type="text" class="form-control" id="Username" name="Username" placeholder="Enter username">
-                </div>
-                <div class="form-group">
-                    <label for="Password">Password:</label>
-                    <input type="password" class="form-control" id="Password" name="Password" placeholder="Enter password">
-                </div>
-                <p>Don't have an account? <a href="/signup">Sign up</a></p>
-
-                <button type="submit" id="login" class="btn btn-default">Submit</button>
-            </form>
-
-            <div id="message" style="display:none"><h3>You are now logged in</h2></div>
-
+            <h2>You are currently logged in</h2>
         </div>
+        <% } %>
 
     </div>
 

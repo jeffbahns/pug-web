@@ -24,6 +24,7 @@
                         <th>Location</th>
                         <th>Date</th>
                         <th><!--Join game spacer, for now--></th>
+                        <th><!--Delete game spacer, for now--></th>
                     </tr>
                 </thead>
                 <% for (var i=0; rs.length > i; i++) { %>
@@ -42,7 +43,12 @@
                             <%= timeFormatter(rs[i].GameDateTime.substr(8, 4)) %>
                         </td>
                         <td>
-                            <a href="#" type="button" class="btn btn-primary">Join Game</a>
+                            <a href="/game/join/?GameID=<%= rs[i].GameID %>&PlayerID=<%= data.PlayerID %>" type="button" class="btn btn-primary">Join Game</a>
+                        </td>
+                        <td>
+                            <% if(rs[i].CreatorID == data.PlayerID) { %>
+                            <a href="#" type="button" class="btn btn-danger">Delete Game</a>
+                            <% } %>
                         </td>
                     </tr>
                 </tbody>

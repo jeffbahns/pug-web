@@ -27,7 +27,7 @@ router.get('/authenticate', function(req, res) {
         }
         else {
             req.session.account = account;
-            response.message = "You are now logged in";
+            response.message = "Logged in successfully";
         }
         res.json(response);
     });
@@ -70,7 +70,8 @@ function load_user_and_render(req, res, shit_to_load) {
     else {
         data.first_name = req.session.account.FirstName;
         data.last_name = req.session.account.LastName;
-        data.player_id = req.session.account.PlayerID;
+        data.PlayerID = req.session.account.PlayerID;
+        data.Username = req.session.account.Username;
         res.render(shit_to_load, {data: data});
     }
 }

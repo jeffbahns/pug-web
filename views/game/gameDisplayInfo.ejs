@@ -12,7 +12,8 @@
         Date: <%= rs[0].GameDateTime.substr(4, 2) %> /
         <%= rs[0].GameDateTime.substr(6, 2) %> /
         <%= rs[0].GameDateTime.substr(0, 4) %><br>
-        Duration: <%= rs[0].GameDuration %> hour(s)
+        Duration: <%= rs[0].GameDuration %> hour(s)<br>
+        Creator: <a href="/player/?PlayerID=<%= rs[0].CreatorID %>"><%= cr[0].Username %></a>
     </p>
     </div>
 
@@ -31,7 +32,13 @@
     <div class="well">
         <% for(var i=0; rs.length > i; i++) { %>
         <p>
-            <a href="/player/?PlayerID=<%= rs[i].PlayerID %>"><%= rs[i].Username %><br></a>
+            <% if(rs[i].PlayerID == rs[0].CreatorID) { %>
+                <a href="/player/?PlayerID=<%= rs[i].PlayerID %>"><%= rs[i].Username %></a> (Creator)<br>
+
+            <% } else { %>
+                <a href="/player/?PlayerID=<%= rs[i].PlayerID %>"><%= rs[i].Username %><br></a>
+
+            <% } %>
         </p>
         <% } %>
     </div>

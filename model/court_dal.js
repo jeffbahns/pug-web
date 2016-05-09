@@ -10,7 +10,9 @@ exports.GetAll = function(callback) {
                 callback(true);
                 return;
             }
+            console.log("COURTS ____________________________");
             console.log(result);
+            console.log("///COURTS_________________________)");
             callback(false, result);
         });
 };

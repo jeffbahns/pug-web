@@ -17,7 +17,7 @@ exports.GetAll = function(callback) {
 };
 
 exports.GetAllWithCourts = function(callback) {
-    connection.query('SELECT * FROM game JOIN court ON court.courtID = game.GameID;',
+    connection.query('SELECT * FROM game JOIN court ON court.courtID = game.CourtID;',
         function(err, result) {
             if (err) {
                 console.log(err);
@@ -49,12 +49,30 @@ exports.GetByID = function(GameID, callback) {
 };
 
 exports.Insert = function(game_info, callback) {
-    query = 'INSERT INTO game(GameDateTime, GameName, GameDuration, SkillLevel, CourtID) VALUES (' +
+    query = 'INSERT INTO game(GameDateTime, GameName, GameDuration, SkillLevel, CourtID, CreatorID) VALUES (' +
     '\'' + game_info.GameDateTime + '\', ' +
     '\'' + game_info.GameName + '\', ' +
     game_info.GameDuration + ', ' +
     '\'' + game_info.SkillLevel + '\', ' +
-    game_info.CourtID + ')';
+    game_info.CourtID + ', ' +
+    game_info.CreatorID + ')'; 
+    console.log(query);
+    connection.query(query,
+        function(err, result) {
+            if(err) {
+                console.log(err);
+                callback(err);
+                return err;
+            }
+            console.log(result);
+            callback(false, result);
+        });
+};
+
+exports.JoinGame = function(GameID, PlayerID, callback) {
+    query = 'INSERT INTO player_in_game(GameID, PlayerID) VALUES ('
+    + GameID + ', '
+    + PlayerID + ')';
     connection.query(query,
         function(err, result) {
             if(err) {
