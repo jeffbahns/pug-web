@@ -1,5 +1,4 @@
 <% var js_includes = ['https://code.jquery.com/jquery-1.12.3.min.js', '/javascripts/create_game_ajax.js']%>
-
 <% include ../partials/header.ejs %>
 
 <div class="container">
@@ -39,7 +38,7 @@
         </div>
         <div class="form-group">
             <label for="CreatorID">Creator:</label>
-            <input type="text" id="CreatorID" class="form-control" value="<%= data.PlayerID %>" placeholder="<%= data.Username %>"/>
+            <input type="text" id="CreatorID" class="form-control" value="<%= data.PlayerID %>" readonly/>
         </div>
         <button type="submit" id="createGame" class="btn btn-default">Submit</button>
     </form>

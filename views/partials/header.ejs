@@ -14,7 +14,7 @@
     <% }%>
     <% }%>
 </head>
-<body>
+<body style="background-color:honeydew;">
 
 <nav class="navbar navbar-inverse"><!--navbar-fixed-top-->
     <div class="container-fluid">
@@ -30,9 +30,28 @@
             <ul class="nav navbar-nav">
                 <!--<li><a href="/">Home</a></li>-->
                 <% if(typeof data.first_name != "undefined") { %>
-                <li><a href="/game/all">Games</a></li>
-                <li><a href="/court/all">Courts</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Games
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/game/all">All</a></li>
+                        <li><a href="/game/create"><span class="glyphicon glyphicon-plus"/></a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Courts
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/court/all">All</a></li>
+                        <li><a href="/court/create"><span class="glyphicon glyphicon-plus"/></a></li>
+                    </ul>
+                </li>
                 <% } %>
+
                 <li><a href="/about">About</a></li>
             </ul>
             <% if(typeof data.first_name == "undefined") { %>

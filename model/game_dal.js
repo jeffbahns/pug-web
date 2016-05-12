@@ -48,6 +48,43 @@ exports.GetByID = function(GameID, callback) {
         });
 };
 
+exports.GetByPlayerID = function(PlayerID, callback) {
+    query = 'SELECT * FROM game\n'
+    + 'JOIN player_in_game pig ON pig.GameID = game.GameID\n'
+    + 'JOIN court ON court.CourtID = game.CourtID\n'
+        + 'WHERE PlayerID = ' + PlayerID + ';';
+
+    console.log(query);
+    connection.query(query,
+        function(err, result) {
+            if(err) {
+                console.log(err);
+                callback(true);
+                return;
+            }
+            console.log(result);
+            callback(false, result);
+        });
+};
+
+exports.GetByCourtID = function(CourtID, callback) {
+    query = 'SELECT * FROM game\n'
+        + 'JOIN court ON court.CourtID = game.CourtID\n'
+        + 'WHERE court.CourtID = ' + CourtID + ';';
+
+    console.log(query);
+    connection.query(query,
+        function(err, result) {
+            if(err) {
+                console.log(err);
+                callback(true);
+                return;
+            }
+            console.log(result);
+            callback(false, result);
+        });
+};
+
 exports.Insert = function(game_info, callback) {
     query = 'INSERT INTO game(GameDateTime, GameName, GameDuration, SkillLevel, CourtID, CreatorID) VALUES (' +
     '\'' + game_info.GameDateTime + '\', ' +
@@ -55,7 +92,35 @@ exports.Insert = function(game_info, callback) {
     game_info.GameDuration + ', ' +
     '\'' + game_info.SkillLevel + '\', ' +
     game_info.CourtID + ', ' +
-    game_info.CreatorID + ')'; 
+    game_info.CreatorID + ')';
+    console.log(query);
+    connection.query(query,
+        function(err, result) {
+            if(err) {
+                console.log(err);
+                callback(err);
+                return err;
+            }
+            console.log(result);
+            query = 'INSERT INTO player_in_game(GameID, PlayerID) VALUES ('
+            + result.insertId + ', '
+            + game_info.CreatorID + ');';
+            console.log(query);
+            connection.query(query,
+                function(err, result) {
+                    if(err) {
+                        console.log(err);
+                        callback(err);
+                        return err;
+                    }
+                    console.log(result);
+                    callback(false, result);
+                });
+        });
+};
+
+exports.Delete = function(game_info, callback) {
+    query = 'DELETE FROM game WHERE GameID=' + game_info.GameID;
     console.log(query);
     connection.query(query,
         function(err, result) {
@@ -73,6 +138,7 @@ exports.JoinGame = function(GameID, PlayerID, callback) {
     query = 'INSERT INTO player_in_game(GameID, PlayerID) VALUES ('
     + GameID + ', '
     + PlayerID + ')';
+    console.log(query);
     connection.query(query,
         function(err, result) {
             if(err) {

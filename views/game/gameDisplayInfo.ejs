@@ -51,7 +51,13 @@
     <% if(!inGameAlready) { %>
     <div id="PlayerID" style="display:none"><%= data.PlayerID %></div>
     <div id="GameID" style="display:none"><%= rs[0].GameID %></div>
-    <button type="button" id="joinGame" class="btn btn-primary">Join Game</button>
+    <form role="form">
+        <div class="form-group">
+            <input type="text" id="GameID" class="form-control" name="GameID" value="<%= rs[0].GameID %>">
+        </div>
+
+        <button type="submit" id="joinGame" class="btn btn-primary">Join Game</button>
+    </form>
     <% } %>
     <% } else { %>
     No games exist.

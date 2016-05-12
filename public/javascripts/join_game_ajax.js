@@ -1,10 +1,9 @@
 var joinGame = function() {
 
     var payload = {
-        PlayerID: $('#PlayerID').val(),
         GameID: $('#GameID').val()
     };
-
+    console.log(payload);
     $.ajax({
         url: '/player/join',  // url where we want to send the form data
         type: 'GET', // the type of form submission; GET or POST
@@ -13,7 +12,7 @@ var joinGame = function() {
         complete: function(data) {  // what to do with the response back from the server
             $('#message').html(data.responseJSON.message);
             $('#message').show();
-            //window.location.assign('/');
+            // window.location.assign('/');
         }
     })
 };

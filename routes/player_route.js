@@ -1,13 +1,20 @@
 var express = require('express');
 var router = express.Router();
 var playerDal = require('../model/player_dal');
+var gameDal = require('../model/game_dal');
 
 router.get('/', function(req, res) {
     playerDal.GetByID(req.query.PlayerID, function(err, result) {
         if(err) {
-            throw err;
+            res.send(err);
         }
-        load_user_and_render(req, res, 'player/playerDisplayInfo.ejs', {rs: result, PlayerID: req.query.PlayerID});
+        gameDal.GetByPlayerID(req.query.PlayerID, function(err, result2) {
+            if(err) {
+                res.send(err);
+            }
+            load_user_and_render(req, res, 'player/playerDisplayInfo.ejs',
+                {rs: result, PlayerID: req.query.PlayerID, gr: result2});
+        });
     });
 });
 
@@ -22,6 +29,22 @@ router.get('/join', function(req, res) {
         }
         res.json(response);
     });
+});
+
+router.get('/add_friend', function(req, res) {
+    playerDal.AddFriend(req.session.account.PlayerID, req.query.PlayerID, function(err, result) {
+        response = {};
+        if (err) {
+            response.message = err.message;
+        }
+        else if(result.length == 0){
+            response.message = "You are already friends";
+        }
+        else {
+            response.message = "New friend added";
+        }
+        res.json(response);
+    })
 });
 
 function load_user_and_render(req, res, shit_to_load, extra_shit) {

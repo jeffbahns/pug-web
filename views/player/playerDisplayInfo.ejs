@@ -1,17 +1,68 @@
 <% include ../partials/header.ejs %>
 
 <div class="container">
-    <h3><%= rs[0].Username %></h3>
-    <p>
-        Name: <%= rs[0].FirstName %> <%= rs[0].LastName %><br>
-        Age: <%= rs[0].Age %><br>
-        Phone: (<%= rs[0].PhoneNumber.substr(0, 3) %>)
-        <%= rs[0].PhoneNumber.substr(3, 3) %> -
-        <%= rs[0].PhoneNumber.substr(6, 4) %>
-    </p>
-    <% if(data.last_name != rs[0].LastName) { %>
-        <button type="button" class="btn btn-primary">Add Friend</button>
-    <% } %>
+
+    <div class="row">
+        <div class="jumbotron" style="text-align:center">
+            <h1><%= rs[0].Username %></h1>
+            <% if(data.PlayerID != rs[0].PlayerID) { %>
+            <a href="/player/add_friend?PlayerID=<%= rs[0].PlayerID %>"
+                class="btn btn-primary">Add Friend</a>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-3">
+            <p>
+                Name: <%= rs[0].FirstName %> <%= rs[0].LastName %><br>
+                Age: <%= rs[0].Age %><br>
+                Phone: (<%= rs[0].PhoneNumber.substr(0, 3) %>)
+                <%= rs[0].PhoneNumber.substr(3, 3) %> -
+                <%= rs[0].PhoneNumber.substr(6, 4) %>
+            </p>
+        </div>
+
+        <div class="col-sm-6">
+            <% if(gr.length > 0) { %>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Location</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <% for (var i=0; gr.length > i; i++) { %>
+                <tbody>
+                <tr>
+                    <td>
+                        <a href="/game?GameID=<%=gr[i].GameID%>"><%= gr[i].GameName %></a>
+                    </td>
+                    <td>
+                        <a href="/court?CourtID=<%= gr[i].CourtID %>"><%= gr[i].CourtName %></a>
+                    </td>
+                    <td>
+                        <%= gr[i].GameDateTime.substr(4, 2) %> /
+                        <%= gr[i].GameDateTime.substr(6, 2) %> /
+                        <%= gr[i].GameDateTime.substr(0, 4) %><br>
+                    </td>
+                </tr>
+                </tbody>
+                <% }} %>
+            </table>
+        </div>
+
+        <div class="col-sm-3">
+
+        </div>
+
+    </div>
+
+
+
+
 </div>
 
 <% include ../partials/footer.ejs %>

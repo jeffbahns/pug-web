@@ -1,18 +1,44 @@
 <% include ../partials/header.ejs %>
 
 <div class="container">
+    <div class="jumbotron">
+        <h2 style="text-align:center"><%= rs[0].CourtName %></h2>
+        <p>
+            <%= rs[0].Address %><br>
+            <%= rs[0].City%><br>
+            <%= rs[0].State %><br>
+            <%= rs[0].ZipCode %><br>
+        </p>
+    </div>
 
-    <h3><%= rs[0].CourtName %></h3>
-    <p>
-        <%= rs[0].Address %><br>
-        <%= rs[0].City%><br>
-        <%= rs[0].State %><br>
-        <%= rs[0].ZipCode %><br>
-    </p>
-
-    <h4>Court Schedule</h4>
-
-    <button type="button" class="btn btn-primary">Create New Game</button>
+    <div class="row">
+        <div class="col-sm-6">
+            <% if(gr.length > 0) { %>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <% for (var i=0; gr.length > i; i++) { %>
+                <tbody>
+                <tr>
+                    <td>
+                        <a href="/game?GameID=<%=gr[i].GameID%>"><%= gr[i].GameName %></a>
+                    </td>
+                    <td>
+                        <%= gr[i].GameDateTime.substr(4, 2) %> /
+                        <%= gr[i].GameDateTime.substr(6, 2) %> /
+                        <%= gr[i].GameDateTime.substr(0, 4) %><br>
+                    </td>
+                </tr>
+                </tbody>
+                <% }} %>
+            </table>
+        </div>
+    </div>
+    <a href="/game/create" class="btn btn-primary">Create New Game</a>
 </div>
 
 <% include ../partials/footer.ejs %>

@@ -30,3 +30,23 @@ exports.GetByID = function(CourtID, callback) {
             callback(false, result);
         });
 };
+
+exports.Insert = function(court_info, callback) {
+    query = 'INSERT INTO court(CourtName, Address, City, State, ZipCode) VALUES ('
+        + '\'' + court_info.CourtName + '\', '
+        + '\'' + court_info.Address + '\', '
+        + '\'' + court_info.City + '\', '
+        + '\'' + court_info.State + '\', '
+        + '\'' + court_info.ZipCode + '\');';
+    console.log(query);
+    connection.query(query,
+        function(err, result) {
+            if(err) {
+                console.log(err);
+                callback(true, err); // not sure if correct
+                return;
+            }
+            console.log(result);
+            callback(false, result);
+        });
+};

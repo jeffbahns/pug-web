@@ -1,14 +1,16 @@
-var login = function() {
+var createCourt = function() {
 
     var payload = {
-        Username: $('#Username').val(),
-        Password: $('#Password').val()
+        CourtName: $('#CourtName').val(),
+        Address: $('#Address').val(),
+        City: $('#City').val(),
+        State: $('#State').val(),
+        ZipCode: $('#ZipCode').val()
     };
-
     console.log(payload);
 
     $.ajax({
-        url: '/authenticate',  // url where we want to send the form data
+        url: '/court/save',  // url where we want to send the form data
         type: 'GET', // the type of form submission; GET or POST
         contentType: "json",  // the type of data we are sending
         data: payload,  // the actual data we are sending
@@ -16,21 +18,21 @@ var login = function() {
 
             $('#message').html(data.responseJSON.message);
             $('#message').show();
-            //window.location.assign('/')
+            // window.location.assign('/');
         }
     })
 };
 
 $(document).ready(function() {
 
-    $('#login').click(function(e) {
+    $('#createCourt').click(function(e) {
         // When ddBtn is clicked this console log statement logs to your browser's console log not Node.js in Webstorm
-        console.log('login clicked');
+        console.log('create court clicked');
 
         // this prevents the form from being submitted using the non-ajax method
         e.preventDefault();
 
         // runs the ajax function defined above.
-        login();
+        createCourt();
     });
 });

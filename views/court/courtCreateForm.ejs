@@ -1,0 +1,42 @@
+<% var js_includes = ['https://code.jquery.com/jquery-1.12.3.min.js', '/javascripts/create_court_ajax.js']%>
+<% include ../partials/header.ejs %>
+
+<div class="container">
+    <h2>Create New Court</h2>
+    <div id="message" style="display:none"><h2>Court successfully created</h2></div><br>
+    <div class="row">
+        <div class="col-sm-6">
+            <form role="form">
+                <div class="form-group">
+                    <label for="CourtName">Game Title:</label>
+                    <input type="text" class="form-control" id="CourtName" name="CourtName">
+                </div>
+                <div class="form-group">
+                    <label for="Address">Address:</label>
+                    <input type="text" class="form-control" id="Address" name="Address">
+                </div>
+                <div class="form-group">
+                    <label for="City">City / Town:</label>
+                    <input type="text" class="form-control" id="City" name="City">
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="State">State:</label>
+                            <input type="text" class="form-control" id="State" name="State">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="ZipCode">Zip / Postal Code:</label>
+                            <input type="text" class="form-control" id="ZipCode" name="ZipCode">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" id="createCourt" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer.ejs %>

@@ -16,6 +16,7 @@ router.get('/login', function(req, res) {
 });
 
 router.get('/authenticate', function(req, res) {
+    console.log(req.body);
     console.log(req.query);
     accountDal.GetByUsername(req.query.Username, req.query.Password, function(err, account) {
         response = {};

@@ -4,14 +4,16 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
-
         </div>
 
         <% if(typeof data.first_name == "undefined") { %>
             <% include ../partials/login_partial.ejs %>
         <% } else { %>
         <div class="col-sm-4">
-            <h2>You are currently logged in</h2>
+            <h3>
+                You are currently logged in<br>
+                Would you like to <a href="/logout">log out?</a>
+            </h3>
         </div>
         <% } %>
 

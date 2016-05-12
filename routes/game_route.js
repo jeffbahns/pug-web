@@ -47,12 +47,8 @@ router.get('/save', function(req, res) {
     gameDal.Insert(req.query, function(err, result) {
         response = {};
         if(err) {
-            // response.message = err.message;
             response.message = "Game creation unsuccessful";
         }
-        // else if (result == null) {
-        //     response.message = "Game creation unsuccessful";
-        // }
         else {
             response.message = "Game successfully created, have fun!";
         }
@@ -60,15 +56,34 @@ router.get('/save', function(req, res) {
     });
 });
 
+router.get('/delete', function(req, res) {
+    console.log(req.query);
+    gameDal.Delete(req.query, function(err, result) {
+        response = {};
+        if(err) {
+            response.message = "Game deletion unsuccessful";
+        }
+        else {
+            response.message = "Game successfully deleted";
+        }
+        res.json(response);
+    });
+});
+
 router.get('/join', function(req, res) {
     console.log(req.query);
-    gameDal.JoinGame(req.query.GameID, req.query.PlayerID, function(err, result) {
+    gameDal.JoinGame(req.query.GameID, req.session.account.PlayerID, function(err, result) {
+        response = {};
         if(err) {
-            console.log(err);
-            res.send('Error, you probably already joined this game');
-            return;
+            response.message = "You probably already joined this game";
         }
-        res.send('Successfully joined');
+        else if(result == null) {
+            response.message = "You already joined";
+        }
+        else {
+            response.message = "Successfully joined";
+        }
+        res.json(response);
     });
 });
 
