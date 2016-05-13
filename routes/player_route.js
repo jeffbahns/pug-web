@@ -34,6 +34,17 @@ router.get('/add_friend', function(req, res) {
     })
 });
 
+router.get('/friends', function(req, res) {
+    playerDal.GetFriendsByID(req.session.account.PlayerID, function(err, result) {
+        if(err) {
+            res.send(err);
+        }
+        console.log(result[0]);
+        load_user_and_render(req, res, 'player/playerDisplayFriends.ejs',
+            {rs: result[0]});
+    });
+});
+
 function load_user_and_render(req, res, shit_to_load, extra_shit) {
     var data = {
         title : 'Express'

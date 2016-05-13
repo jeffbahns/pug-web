@@ -6,7 +6,7 @@ var gameDal = require('../model/game_dal');
 router.get('/all', function(req, res) {
    courtDal.GetAll(function(err, result) {
        if(err) {
-           throw err;
+           res.send(err);
        }
        load_user_and_render(req, res, 'court/courtDisplayAll.ejs', {rs: result});
    });

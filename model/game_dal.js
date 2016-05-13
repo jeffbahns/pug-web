@@ -85,14 +85,14 @@ exports.GetByCourtID = function(CourtID, callback) {
         });
 };
 
-exports.Insert = function(game_info, callback) {
+exports.Insert = function(CreatorID, game_info, callback) {
     query = 'INSERT INTO game(GameDateTime, GameName, GameDuration, SkillLevel, CourtID, CreatorID) VALUES (' +
     '\'' + game_info.GameDateTime + '\', ' +
     '\'' + game_info.GameName + '\', ' +
     game_info.GameDuration + ', ' +
     '\'' + game_info.SkillLevel + '\', ' +
     game_info.CourtID + ', ' +
-    game_info.CreatorID + ')';
+    CreatorID + ')';
     console.log(query);
     connection.query(query,
         function(err, result) {
@@ -104,7 +104,7 @@ exports.Insert = function(game_info, callback) {
             console.log(result);
             query = 'INSERT INTO player_in_game(GameID, PlayerID) VALUES ('
             + result.insertId + ', '
-            + game_info.CreatorID + ');';
+            + CreatorID + ');';
             console.log(query);
             connection.query(query,
                 function(err, result) {

@@ -3,47 +3,54 @@
 
 <div class="container">
     <h2>Create New Game</h2>
-    <div id="message" style="display:none"><h2>Game successfully created</h2></div><br>
-    <form role="form">
-        <div class="form-group">
-            <label for="GameName">Game Title:</label>
-            <input type="text" class="form-control" id="GameName" name="GameName">
+    <div class="row">
+        <div class="col-sm-6">
+            <div id="message" style="display:none" class="alert alert-success">
+                <strong>Game successfully created</strong> Indicates a successful or positive action.
+            </div>
+            <div id="error" style="display:none" class="alert alert-danger">
+                <strong>Game successfully created</strong> Indicates a successful or positive action.
+            </div>
+            <form role="form">
+                <div class="form-group">
+                    <label for="GameName">Game Title:</label>
+                    <input type="text" class="form-control" id="GameName" name="GameName">
+                </div>
+                <div class="form-group">
+                    <label for="GameDateTime">Date and Time:</label>
+                    <input type="text" class="form-control" id="GameDateTime" name="GameDateTime">
+                </div>
+                <div class="form-group">
+                    <label for="GameDuration">Game Duration:</label>
+                    <input type="text" class="form-control" id="GameDuration" name="GameDuration">
+                </div>
+                <div class="form-group">
+                    <label for="CourtID">Select Court:</label>
+                    <select class="form-control" id="CourtID">
+                        <% for(var i=0; i < rs.length; i++) {%>
+                        <option value="<%= rs[i].CourtID %>">
+                            <%= rs[i].CourtName %>    -    <%= rs[i].City %>,
+                            <%= rs[i].State %>
+                        </option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="SkillLevel">Skill Level:</label>
+                    <select class="form-control" id="SkillLevel" name="SkillLevel">
+                        <option value="C">Casual</option>
+                        <option value="M">Moderate</option>
+                        <option value="S">Serious</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="CreatorID">Creator:</label>
+                    <input type="text" id="CreatorID" class="form-control" value="<%= data.Username %>" readonly/>
+                </div>
+                <button type="submit" id="createGame" class="btn btn-default">Submit</button>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="GameDateTime">Date and Time:</label>
-            <input type="text" class="form-control" id="GameDateTime" name="GameDateTime">
-        </div>
-        <div class="form-group">
-            <label for="GameDuration">Game Duration:</label>
-            <input type="text" class="form-control" id="GameDuration" name="GameDuration">
-        </div>
-        <div class="form-group">
-            <label for="CourtID">Select Court:</label>
-            <select class="form-control" id="CourtID">
-                <% for(var i=0; i < rs.length; i++) {%>
-                    <option value="<%= rs[i].CourtID %>">
-                        <%= rs[i].CourtName %>    -    <%= rs[i].City %>,
-                        <%= rs[i].State %>
-                    </option>
-                <% } %>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="SkillLevel">Skill Level:</label>
-            <select class="form-control" id="SkillLevel" name="SkillLevel">
-                <option value="C">Casual</option>
-                <option value="M">Moderate</option>
-                <option value="S">Serious</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="CreatorID">Creator:</label>
-            <input type="text" id="CreatorID" class="form-control" value="<%= data.PlayerID %>" readonly/>
-        </div>
-        <button type="submit" id="createGame" class="btn btn-default">Submit</button>
-    </form>
-
-
+    </div>
 </div>
 
 <% include ../partials/footer.ejs %>

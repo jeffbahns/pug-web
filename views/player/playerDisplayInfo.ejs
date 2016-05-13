@@ -8,6 +8,8 @@
             <% if(data.PlayerID != rs[0].PlayerID) { %>
             <a href="/player/add_friend?PlayerID=<%= rs[0].PlayerID %>"
                 class="btn btn-primary">Add Friend</a>
+            <% } else { %>
+            <a type="button" href="/logout">Log out</a>
             <% } %>
         </div>
     </div>

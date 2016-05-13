@@ -49,10 +49,10 @@ router.get('/create', function(req, res) {
 
 router.get('/save', function(req, res) {
     console.log(req.query);
-    gameDal.Insert(req.query, function(err, result) {
+    gameDal.Insert(req.session.account.PlayerID, req.query, function(err, result) {
         response = {};
         if(err) {
-            response.message = "Game creation unsuccessful";
+            response.error = err + "\nGame creation unsuccessful";
         }
         else {
             response.message = "Game successfully created, have fun!";
@@ -79,7 +79,7 @@ router.get('/join', function(req, res) {
     gameDal.JoinGame(req.session.account.PlayerID, req.query.GameID, function (err, result) {
         response = {};
         if (err) {
-            response.message = err.message;
+            response.error = err.message;
         }
         else {
             response.message = "Joined successfully";
@@ -92,7 +92,7 @@ router.get('/leave', function(req, res) {
     gameDal.LeaveGame(req.session.account.PlayerID, req.query.GameID, function(err, result) {
         response = {};
         if(err) {
-            response.message = err.message;
+            response.error = err.message;
         }
         else {
             response.message = "Left game successfully"

@@ -31,13 +31,9 @@ exports.GetByID = function(PlayerID, callback) {
 };
 
 exports.GetFriendsByID = function(PlayerID, callback) {
-    query = 'SELECT FriendID1 as FriendID FROM friends\n'
-    + 'WHERE FriendID2 = ' + PlayerID + '\n'
-    + 'UNION\n'
-    + 'SELECT FriendID2 as FriendID FROM friends\n'
-    + 'WHERE FriendID1 = ' + PlayerID + '\n';
-    console.log(query);
-    connection.query(query,
+    query = 'CALL Friends_GetByPlayerID(?);';
+    console.log(query, PlayerID);
+    connection.query(query, PlayerID,
         function(err, result) {
             if(err) {
                 console.log(err);

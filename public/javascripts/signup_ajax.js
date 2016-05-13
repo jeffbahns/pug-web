@@ -15,10 +15,16 @@ var signup = function() {
         contentType: "json",  // the type of data we are sending
         data: payload,  // the actual data we are sending
         complete: function(data) {  // what to do with the response back from the server
-
-            $('#message').html(data.responseJSON.message);
-            $('#message').show();
-            // window.location.assign('/login');
+            if(data.responseJSON.message != undefined) {
+                $('#message').html(data.responseJSON.message);
+                $('#error').hide();
+                $('#message').show();
+            }
+            else {
+                $('#error').html(data.responseJSON.error);
+                $('#message').hide();
+                $('#error').show();
+            }
 
         }
     })

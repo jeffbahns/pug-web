@@ -21,10 +21,10 @@ router.get('/authenticate', function(req, res) {
     accountDal.GetByUsername(req.query.Username, req.query.Password, function(err, account) {
         response = {};
         if (err) {
-            response.message = err.message;
+            response.error = err.message;
         }
         else if (account == null) {
-            response.message = "Account not found";
+            response.error = "Account not found";
         }
         else {
             req.session.account = account;
@@ -51,7 +51,7 @@ router.get('/save', function(req, res) {
     req.query.LastName, req.query.PhoneNumber, req.query.Age, function(err, result) {
             response = {};
             if (err) {
-                response.message = err.message;
+                response.error = err.message;
             }
             else {
                 response.message = "You successfully signed up for Sixth Man";

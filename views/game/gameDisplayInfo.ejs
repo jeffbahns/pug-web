@@ -1,4 +1,8 @@
-<% var js_includes = ['https://code.jquery.com/jquery-1.12.3.min.js', '/javascripts/join_game_ajax.js']%>
+<% var js_includes = ['https://code.juery.com/jquery-1.12.3.min.js',
+    '/javascripts/join_game_ajax.js',
+    '/javascripts/leave_game_ajax.js',
+    '/javascripts/delete_game_ajax.js'
+]%>
 <% include ../partials/header.ejs %>
 
 <div class="container">
@@ -48,13 +52,15 @@
     <%      if( rs[i].PlayerID == data.PlayerID ) { %>
     <%          inGameAlready = true; %>
     <%      }}%>
-    <% if(!inGameAlready) { %>
+    <% if(rs[0].CreatorID == data.PlayerID) { %>
+    <button type="submit" onClick="deleteGame(<%= rs[0].GameID %>)" class="btn btn-danger">Delete Game</button>
+    <% } else if(!inGameAlready) { %>
     <button type="submit" onClick="joinGame(<%= rs[0].GameID %>)" class="btn btn-primary">Join Game</button>
     <% } else { %>
-    <button type="submit" onClick="leaveGame(<%= rs[0].GameID %>)" class="btn btn-danger">Leave Game</button>
+    <button type="submit" onClick="leaveGame(<%= rs[0].GameID %>)" class="btn btn-warning">Leave Game</button>
     <% } %>
     <% } else { %>
-    No games exist.
+    The game you are looking for does not seem to exist
     <% } %>
     <div id="message" style="display:none" class="alert alert-success">
         <strong>Success!</strong> Indicates a successful or positive action.
