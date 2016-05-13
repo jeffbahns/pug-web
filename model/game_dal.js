@@ -134,19 +134,33 @@ exports.Delete = function(game_info, callback) {
         });
 };
 
-exports.JoinGame = function(GameID, PlayerID, callback) {
-    query = 'INSERT INTO player_in_game(GameID, PlayerID) VALUES ('
-    + GameID + ', '
-    + PlayerID + ')';
-    console.log(query);
-    connection.query(query,
-        function(err, result) {
-            if(err) {
-                console.log(err);
-                callback(true);
-                return;
-            }
-            console.log(result);
+exports.JoinGame = function(PlayerID, GameID, callback) {
+    query = 'INSERT INTO player_in_game(PlayerID, GameID) VALUES (?, ?)';
+    query_data = [PlayerID, GameID];
+    console.log(query, query_data);
+    connection.query(query, query_data, function(err, result) {
+        if(err) {
+            console.log(err);
+            callback(err, null);
+        }
+        else {
             callback(false, result);
-        });
+        }
+    });
+};
+
+exports.LeaveGame = function(PlayerID, GameID, callback) {
+    query = 'DELETE FROM player_in_game\n'
+    + 'WHERE PlayerID = ? AND GameID = ?;';
+    query_data = [PlayerID, GameID];
+    console.log(query, query_data);
+    connection.query(query, query_data, function(err, result) {
+        if(err) {
+            console.log(err);
+            callback(err, null);
+        }
+        else {
+            callback(false, result);
+        }
+    });
 };

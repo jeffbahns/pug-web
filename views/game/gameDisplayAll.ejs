@@ -1,4 +1,8 @@
-<% var js_includes = ['https://code.juery.com/jquery-1.12.3.min.js', '/javascripts/join_game_ajax.js']%>
+<% var js_includes = ['https://code.juery.com/jquery-1.12.3.min.js',
+        '/javascripts/join_game_ajax.js',
+        '/javascripts/leave_game_ajax.js',
+        '/javascripts/delete_game_ajax.js'
+]%>
 <% include ../partials/header.ejs %>
 
 <div class="container">
@@ -9,6 +13,17 @@
     <%      suffix = (time_24hr.substr(0,2) >= 12)? 'PM' : 'AM'; %>
     <%      return h + ":" + m + suffix; %>
     <% } %>
+
+    <% function inGame(rs, gr, index) { %>
+    <%      var inGame = false; %>
+    <%      for(var i=0; i < gr.length; i++) { %>
+    <%          if(rs[index].GameID == gr[i].GameID) { %>
+    <%              inGame = true; %>
+    <%          } %>
+    <%      }%>
+    <%      return inGame; %>
+    <% } %>
+
     <h2>Games</h2>
     <p>
         <a href="/game/all" class="btn btn-info btn-md">
@@ -20,9 +35,9 @@
         <div class="col-sm-4">
             Local games are listed here<br><br>
             You can create new games or join currently listed onces
-
-            <div id="message" style="display:none"><h2>Game successfully created</h2></div><br>
-            <input type="hidden" value="<%= rs[0].GameID %>"/>
+            <div id="message" style="display:none" class="alert alert-success">
+                <strong>Game successfully created</strong> Indicates a successful or positive action.
+            </div>
         </div>
         <div class="col-sm-8">
             <% if(rs.length > 0) { %>
@@ -53,15 +68,29 @@
                         <td>
                             <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                    <!--no title-->
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a type="button" class="btn btn-primary" id="joinGame">Join Game</a></li>
-                                    <% if(rs[i].CreatorID == data.PlayerID) { %>
-                                    <li><a href="/game/delete?GameID=<%= rs[i].GameID %>&PlayerID=<%= data.PlayerID %>"
-                                           type="button" class="btn btn-danger">Delete Game</a></li>
+
+                                    <% if(!inGame(rs, gr, i)) { %>
+                                    <li>
+                                        <button type="submit" class="btn btn-default"
+                                                onClick="joinGame(<%= rs[i].GameID %>)">Join Game</button>
+                                    </li>
+                                    <% } else if(rs[i].CreatorID != data.PlayerID) { %>
+                                    <li>
+                                        <button type="submit" class="btn btn-warning"
+                                           onClick="leaveGame(<%= rs[i].GameID %>)">Leave Game</button>
+                                    </li>
                                     <% } %>
+
+                                    <% if(rs[i].CreatorID == data.PlayerID) { %>
+                                    <li>
+                                        <button type="submit" class="btn btn-danger"
+                                            onClick="deleteGame(<%= rs[i].GameID %>)">Delete Game</button>
+                                    </li>
+                                    <% } %>
+
                                 </ul>
                             </div>
                         </td>

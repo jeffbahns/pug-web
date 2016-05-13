@@ -9,7 +9,12 @@ router.get('/all', function(req, res) {
         if(err) {
             res.send(err);
         }
-        load_user_and_render(req, res, 'game/gameDisplayAll.ejs', {rs: result});
+        gameDal.GetByPlayerID(req.session.account.PlayerID, function(err, result2) {
+            if(err) {
+                res.send(err);
+            }
+            load_user_and_render(req, res, 'game/gameDisplayAll.ejs', {rs: result, gr: result2});
+        });
 
     });
 });
@@ -71,20 +76,29 @@ router.get('/delete', function(req, res) {
 });
 
 router.get('/join', function(req, res) {
-    console.log(req.query);
-    gameDal.JoinGame(req.query.GameID, req.session.account.PlayerID, function(err, result) {
+    gameDal.JoinGame(req.session.account.PlayerID, req.query.GameID, function (err, result) {
         response = {};
-        if(err) {
-            response.message = "You probably already joined this game";
-        }
-        else if(result == null) {
-            response.message = "You already joined";
+        if (err) {
+            response.message = err.message;
         }
         else {
-            response.message = "Successfully joined";
+            response.message = "Joined successfully";
         }
         res.json(response);
     });
+});
+
+router.get('/leave', function(req, res) {
+    gameDal.LeaveGame(req.session.account.PlayerID, req.query.GameID, function(err, result) {
+        response = {};
+        if(err) {
+            response.message = err.message;
+        }
+        else {
+            response.message = "Left game successfully"
+        }
+        res.json(response);
+    }) 
 });
 
 function load_user_and_render(req, res, shit_to_load, extra_shit) {

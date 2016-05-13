@@ -18,7 +18,7 @@ var signup = function() {
 
             $('#message').html(data.responseJSON.message);
             $('#message').show();
-            window.location.assign('/login');
+            // window.location.assign('/login');
 
         }
     })

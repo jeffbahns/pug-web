@@ -6,7 +6,9 @@ var createGame = function() {
         GameDuration: $('#GameDuration').val(),
         CourtID: $('#CourtID').val(),
         SkillLevel: $('#SkillLevel').val(),
-        CreatorID: $('#CreatorID').val()
+        CreatorID: $('#CreatorID').val(),
+        GameID: $('#GameID').val()
+
     };
     console.log(payload);
 

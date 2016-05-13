@@ -18,19 +18,6 @@ router.get('/', function(req, res) {
     });
 });
 
-router.get('/join', function(req, res) {
-    playerDal.JoinGame(req.query.PlayerID, req.query.GameID, function(err, result) {
-        response = {};
-        if (err) {
-            response.message = err.message;
-        }
-        else {
-            response.message = "You have joined";
-        }
-        res.json(response);
-    });
-});
-
 router.get('/add_friend', function(req, res) {
     playerDal.AddFriend(req.session.account.PlayerID, req.query.PlayerID, function(err, result) {
         response = {};

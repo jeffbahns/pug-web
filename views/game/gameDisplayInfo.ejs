@@ -49,19 +49,16 @@
     <%          inGameAlready = true; %>
     <%      }}%>
     <% if(!inGameAlready) { %>
-    <div id="PlayerID" style="display:none"><%= data.PlayerID %></div>
-    <div id="GameID" style="display:none"><%= rs[0].GameID %></div>
-    <form role="form">
-        <div class="form-group">
-            <input type="text" id="GameID" class="form-control" name="GameID" value="<%= rs[0].GameID %>">
-        </div>
-
-        <button type="submit" id="joinGame" class="btn btn-primary">Join Game</button>
-    </form>
+    <button type="submit" onClick="joinGame(<%= rs[0].GameID %>)" class="btn btn-primary">Join Game</button>
+    <% } else { %>
+    <button type="submit" onClick="leaveGame(<%= rs[0].GameID %>)" class="btn btn-danger">Leave Game</button>
     <% } %>
     <% } else { %>
     No games exist.
     <% } %>
+    <div id="message" style="display:none" class="alert alert-success">
+        <strong>Success!</strong> Indicates a successful or positive action.
+    </div>
 </div>
 
 <% include ../partials/footer.ejs %>

@@ -1,11 +1,11 @@
-var joinGame = function(GameID) {
+var leaveGame = function(GameID) {
 
     var payload = {
         GameID: GameID
     };
     console.log(payload);
     $.ajax({
-        url: '/game/join',  // url where we want to send the form data
+        url: '/game/leave',  // url where we want to send the form data
         type: 'GET', // the type of form submission; GET or POST
         contentType: "json",  // the type of data we are sending
         data: payload,  // the actual data we are sending
@@ -18,9 +18,9 @@ var joinGame = function(GameID) {
 
 $(document).ready(function() {
 
-    $('#joinGame').click(function(e) {
-        console.log('join game clicked');
+    $('#leaveGame').click(function(e) {
+        console.log('leave game clicked');
         e.preventDefault();
-        joinGame();
+        leaveGame();
     });
 });

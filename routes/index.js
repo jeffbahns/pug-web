@@ -54,7 +54,7 @@ router.get('/save', function(req, res) {
                 response.message = err.message;
             }
             else {
-                response.message = "You have signed up";
+                response.message = "You successfully signed up for Sixth Man";
             }
             res.json(response);
         });
