@@ -18,7 +18,24 @@ exports.GetAll = function(callback) {
 };
 
 exports.GetByID = function(CourtID, callback) {
-    query = 'SELECT * FROM court WHERE CourtID = ' + CourtID + ';';
+    query = 'SELECT * FROM court\n'
+        + 'LEFT JOIN court_rating cr ON cr.CourtID = court.CourtID\n'
+        + 'LEFT JOIN player ON player.PlayerID = cr.PlayerID\n'
+        + 'WHERE court.CourtID = ' + CourtID + ';';
+    connection.query(query,
+        function(err, result) {
+            if(err) {
+                console.log(err);
+                callback(true);
+                return;
+            }
+            console.log(result);
+            callback(false, result);
+        });
+};
+
+exports.GetRatingsByID = function(CourtID, callback) {
+    query = 'SELECT * FROM court_rating WHERE CourtID = ' + CourtID + ';';
     connection.query(query,
         function(err, result) {
             if(err) {

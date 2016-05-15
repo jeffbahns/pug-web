@@ -15,11 +15,11 @@ router.get('/all', function(req, res) {
 router.get('/', function(req, res) {
    courtDal.GetByID(req.query.CourtID, function(err, result) {
        if(err) {
-           res.send(err);
+           console.log(err);
        }
        gameDal.GetByCourtID(req.query.CourtID, function(err, result2) {
            if(err) {
-               res.send(err);
+               console.log(err);
            }
            load_user_and_render(req, res, 'court/courtDisplayInfo.ejs',
                {rs: result, CourtID: req.query.CourtID, gr: result2});

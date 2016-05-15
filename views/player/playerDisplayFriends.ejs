@@ -2,9 +2,28 @@
 
 <div class="container">
 
-    <% for(var i=0; i < rs.length; i++) { %>
-    <a><%= rs[i].Username %></a><br>
-    <% } %>
+    <div class="col-sm-8">
+        <h2>Friends List</h2>
+        <% if(rs.length > 0) { %>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+            </tr>
+            </thead>
+            <% for (var i=0; rs.length > i; i++) { %>
+            <tbody>
+            <tr>
+                <td><a href="/player?PlayerID=<%= rs[i].FriendID %>"><%= rs[i].Username %></a></td>
+                <td><a href="/player/remove_friend?FriendID=<%= rs[i].FriendID %>">Delete</a></td>
+            </tr>
+            </tbody>
+            <% } %>
+        </table>
+
+        <% } else { %>
+        No courts exist.
+        <% } %>
+    </div>
 
 </div>
 

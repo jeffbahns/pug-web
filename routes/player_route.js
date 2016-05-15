@@ -31,7 +31,20 @@ router.get('/add_friend', function(req, res) {
             response.message = "New friend added";
         }
         res.json(response);
-    })
+    });
+});
+
+router.get('/remove_friend', function(req, res) {
+    playerDal.RemoveFriend(req.session.account.PlayerID, req.query.FriendID, function(err, result) {
+        response = {};
+        if(err) {
+            response.message = err.message;
+        }
+        else {
+            response.message = "Friend successfully removed";
+        }
+        res.json(response);
+    });
 });
 
 router.get('/friends', function(req, res) {

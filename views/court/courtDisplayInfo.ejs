@@ -12,7 +12,10 @@
     </div>
 
     <div class="row">
+
         <div class="col-sm-6">
+            <a href="/game/create" class="btn btn-primary">Create New Game</a>
+
             <% if(gr.length > 0) { %>
             <table class="table table-bordered">
                 <thead>
@@ -37,8 +40,35 @@
                 <% }} %>
             </table>
         </div>
+
+        <div class="col-sm-6">
+            <a href="/court/comment" class="btn btn-primary">Add Comment</a>
+
+            <% if(rs.length > 0) { %>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Comment</th>
+                    <th>Rating (out of 5)</th>
+
+                </tr>
+                </thead>
+                <% for (var i=0; rs.length > i; i++) { %>
+                <tbody>
+                <tr>
+                    <td><a href="/player?PlayerID=<%= rs[i].PlayerID %>"><%= rs[i].Username %></a></td>
+                    <td><%= rs[i].RatingComment%></td>
+                    <td><%= rs[i].RatingScore %></td>
+
+                </tr>
+                </tbody>
+                <% }} %>
+            </table>
+
+        </div>
+
     </div>
-    <a href="/game/create" class="btn btn-primary">Create New Game</a>
 </div>
 
 <% include ../partials/footer.ejs %>
