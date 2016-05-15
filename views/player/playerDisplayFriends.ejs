@@ -1,7 +1,16 @@
+<% var js_includes = [
+    'https://code.juery.com/jquery-1.12.3.min.js',
+    '/javascripts/friends_ajax.js'
+]%>
 <% include ../partials/header.ejs %>
 
 <div class="container">
-
+    <div id="message" style="display:none" class="alert alert-success">
+        <strong>Success!</strong> Indicates a successful or positive action.
+    </div>
+    <div id="error" style="display:none" class="alert alert-warning">
+        <strong>Success!</strong> Indicates a successful or positive action.
+    </div>
     <div class="col-sm-8">
         <h2>Friends List</h2>
         <% if(rs.length > 0) { %>
@@ -14,14 +23,15 @@
             <tbody>
             <tr>
                 <td><a href="/player?PlayerID=<%= rs[i].FriendID %>"><%= rs[i].Username %></a></td>
-                <td><a href="/player/remove_friend?FriendID=<%= rs[i].FriendID %>">Delete</a></td>
+                <td><button type="submit" class="btn btn-primary" onClick="removeFriend(<%= rs[i].FriendID %>)">Delete</button>
+                </td>
             </tr>
             </tbody>
             <% } %>
         </table>
 
         <% } else { %>
-        No courts exist.
+        No friends added yet
         <% } %>
     </div>
 

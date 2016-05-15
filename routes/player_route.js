@@ -19,13 +19,13 @@ router.get('/', function(req, res) {
 });
 
 router.get('/add_friend', function(req, res) {
-    playerDal.AddFriend(req.session.account.PlayerID, req.query.PlayerID, function(err, result) {
+    playerDal.AddFriend(req.session.account.PlayerID, req.query.FriendID, function(err, result) {
         response = {};
         if (err) {
-            response.message = err.message;
+            response.error = err.message;
         }
         else if(result.length == 0){
-            response.message = "You are already friends";
+            response.error = "You are already friends";
         }
         else {
             response.message = "New friend added";
@@ -38,7 +38,7 @@ router.get('/remove_friend', function(req, res) {
     playerDal.RemoveFriend(req.session.account.PlayerID, req.query.FriendID, function(err, result) {
         response = {};
         if(err) {
-            response.message = err.message;
+            response.error = err.message;
         }
         else {
             response.message = "Friend successfully removed";

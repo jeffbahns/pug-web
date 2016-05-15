@@ -63,12 +63,22 @@ exports.AddFriend = function(PlayerID, NewFriendID, callback) {
 };
 
 exports.RemoveFriend = function(PlayerID, RemovedFriendID, callback) {
-    query = 'REMOVE FROM friends\n'
+    query = 'DELETE FROM friends\n'
     + 'WHERE\n'
     + '(FriendID1 = ' + PlayerID + ' AND FriendID2 = ' + RemovedFriendID + ')\n'
     + 'OR\n'
     + '(FriendID1 = ' + RemovedFriendID + ' AND FriendID2 = ' + PlayerID + ');'
-
+    console.log(query);
+    connection.query(query,
+        function(err, result) {
+            if(err) {
+                console.log(err);
+                callback(true);
+                return;
+            }
+            console.log(result);
+            callback(false, result);
+        });
 };
 
 exports.GetCreatorByGameID = function(GameID, callback) {

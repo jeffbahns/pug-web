@@ -1,3 +1,7 @@
+<% var js_includes = [
+    'https://code.juery.com/jquery-1.12.3.min.js',
+    '/javascripts/friends_ajax.js'
+]%>
 <% include ../partials/header.ejs %>
 
 <div class="container">
@@ -6,11 +10,17 @@
         <div class="jumbotron" style="text-align:center">
             <h1><%= rs[0].Username %></h1>
             <% if(data.PlayerID != rs[0].PlayerID) { %>
-            <a href="/player/add_friend?PlayerID=<%= rs[0].PlayerID %>"
+            <a onClick="addFriend(<%= rs[0].PlayerID %>)"
                 class="btn btn-primary">Add Friend</a>
             <% } else { %>
             <a type="button" href="/logout">Log out</a>
             <% } %>
+            <div id="message" style="display:none" class="alert alert-success">
+                <strong>Success!</strong> Indicates a successful or positive action.
+            </div>
+            <div id="error" style="display:none" class="alert alert-warning">
+                <strong>Success!</strong> Indicates a successful or positive action.
+            </div>
         </div>
     </div>
 
