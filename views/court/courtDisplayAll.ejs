@@ -1,21 +1,16 @@
 <% include ../partials/header.ejs %>
 
 <div class="container">
-    <h2>Courts</h2>
-    <p>
-        <a href="/court/all" class="btn btn-info btn-md">
-            <span class="glyphicon glyphicon-refresh"></span> Refresh
-        </a>
-    </p>
-
     <div class="row">
         <div class="col-sm-4">
+            <h2>Courts</h2>
             Local courts are listed here<br><br>
             You can create new courts or play games at currently listed ones
             <div id="message" style="display:none"><h2>Court successfully created</h2></div><br>
 
         </div>
-        <div class="col-sm-8">
+        <br><br><br>
+        <div class="col-sm-6">
             <% if(rs.length > 0) { %>
             <table class="table table-bordered">
                 <thead>
@@ -39,7 +34,7 @@
             <% } else { %>
             No courts exist.
             <% } %>
-            <a href="/court/create" type="button" class="btn btn-primary">Create New Game</a>
+            <a href="/court/create" type="button" class="btn btn-primary">Add Court</a>
         </div>
     </div>
 </div>

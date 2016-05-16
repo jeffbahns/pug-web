@@ -2,9 +2,11 @@
 <% include ../partials/header.ejs %>
 
 <div class="container">
-    <h2>Create New Game</h2>
     <div class="row">
+        <div class="col-sm-3">
+        </div>
         <div class="col-sm-6">
+            <h2>Create New Game</h2>
             <div id="message" style="display:none" class="alert alert-success">
                 <strong>Game successfully created</strong> Indicates a successful or positive action.
             </div>
@@ -17,11 +19,11 @@
                     <input type="text" class="form-control" id="GameName" name="GameName">
                 </div>
                 <div class="form-group">
-                    <label for="GameDateTime">Date and Time:</label>
+                    <label for="GameDateTime">Date and Time:<br>(Format = YYYYMMDDhhmm)</label>
                     <input type="text" class="form-control" id="GameDateTime" name="GameDateTime">
                 </div>
                 <div class="form-group">
-                    <label for="GameDuration">Game Duration:</label>
+                    <label for="GameDuration">Game Duration:<br>(Hours)</label>
                     <input type="text" class="form-control" id="GameDuration" name="GameDuration">
                 </div>
                 <div class="form-group">

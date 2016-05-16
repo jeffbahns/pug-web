@@ -15,7 +15,6 @@ router.get('/all', function(req, res) {
             }
             load_user_and_render(req, res, 'game/gameDisplayAll.ejs', {rs: result, gr: result2});
         });
-
     });
 });
 
@@ -30,6 +29,20 @@ router.get('/', function(req, res) {
             }
             load_user_and_render(req, res, 'game/gameDisplayInfo.ejs',
                 {rs: result, cr: creator_result, GameID: req.query.GameID});
+        });
+    });
+});
+
+router.get('/search', function(req, res) {
+    gameDal.GetAllWithCourtsAndPreferences(req.query, function(err, result) {
+        if(err) {
+            res.send(err);
+        }
+        gameDal.GetByPlayerID(req.session.account.PlayerID, function(err, result2) {
+            if(err) {
+                res.send(err);
+            }
+            load_user_and_render(req, res, 'game/gameDisplayAll.ejs', {rs: result, gr: result2});
         });
     });
 });

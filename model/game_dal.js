@@ -17,7 +17,10 @@ exports.GetAll = function(callback) {
 };
 
 exports.GetAllWithCourts = function(callback) {
-    connection.query('SELECT * FROM game JOIN court ON court.courtID = game.CourtID;',
+    connection.query('SELECT *, COUNT(pig.PlayerID) as NumPlayers FROM game\n'
+    + 'JOIN court ON court.courtID = game.CourtID\n'
+    + 'JOIN player_in_game pig ON pig.GameID = game.GameID\n'
+    + 'GROUP BY GameName;',
         function(err, result) {
             if (err) {
                 console.log(err);
@@ -28,6 +31,26 @@ exports.GetAllWithCourts = function(callback) {
             callback(false, result);
         }
     );
+};
+
+exports.GetAllWithCourtsAndPreferences = function(preferences, callback) {
+    query = 'SELECT *, COUNT(pig.PlayerID) AS NumPlayers FROM game\n'
+        +   'JOIN court ON court.CourtID = game.GameID\n'
+        +   'JOIN player_in_game pig ON pig.GameID = game.GameID\n'
+        +   'WHERE game.GameID IN    (SELECT game.GameID FROM game\n'
+        +                       'WHERE SkillLevel = ?)\n'
+        +   'GROUP BY GameName;';
+    console.log(query, preferences.SkillLevel);
+    connection.query(query, preferences.SkillLevel,
+        function(err, result) {
+            if (err) {
+                console.log(err);
+                callback(true);
+                return;
+            }
+            console.log(result);
+            callback(false, result);
+        });
 };
 
 exports.GetByID = function(GameID, callback) {

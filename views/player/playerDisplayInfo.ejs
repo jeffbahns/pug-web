@@ -5,16 +5,28 @@
 <% include ../partials/header.ejs %>
 
 <div class="container">
+    <% function isFriend(fr, PlayerID) { %>
+    <%      var isFriend = false; %>
+    <%      for(var i=0; i < fr.length; i++) { %>
+    <%          if(fr[i].FriendID == PlayerID) { %>
+    <%              isFriend = true; %>
+    <%          } %>
+    <%      } %>
+    <%      return isFriend; %>
+    <% } %>
 
     <div class="row">
         <div class="jumbotron" style="text-align:center">
             <h1><%= rs[0].Username %></h1>
-            <% if(data.PlayerID != rs[0].PlayerID) { %>
-            <a onClick="addFriend(<%= rs[0].PlayerID %>)"
-                class="btn btn-primary">Add Friend</a>
-            <% } else { %>
+
+            <% if(rs[0].PlayerID == data.PlayerID) { %>
             <a type="button" href="/logout">Log out</a>
+            <% } else if(!isFriend(fr, rs[0].PlayerID)) { %>
+            <a type="button" onClick="addFriend(<%= rs[0].PlayerID %>)">Add Friend</a>
+            <% } else { %>
+            <a type="button" onClick="removeFriend(<%= rs[0].PlayerID %>)">Remove Friend</a>
             <% } %>
+
             <div id="message" style="display:none" class="alert alert-success">
                 <strong>Success!</strong> Indicates a successful or positive action.
             </div>

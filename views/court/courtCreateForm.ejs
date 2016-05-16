@@ -2,10 +2,17 @@
 <% include ../partials/header.ejs %>
 
 <div class="container">
-    <h2>Create New Court</h2>
-    <div id="message" style="display:none"><h2>Court successfully created</h2></div><br>
     <div class="row">
+        <div class="col-sm-3">
+        </div>
         <div class="col-sm-6">
+            <h2>Add New Court</h2>
+            <div id="message" style="display:none" class="alert alert-success">
+                <strong>Game successfully created</strong> Indicates a successful or positive action.
+            </div>
+            <div id="error" style="display:none" class="alert alert-danger">
+                <strong>Game successfully created</strong> Indicates a successful or positive action.
+            </div>
             <form role="form">
                 <div class="form-group">
                     <label for="CourtName">Game Title:</label>

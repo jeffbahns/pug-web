@@ -24,15 +24,9 @@
     <%      return inGame; %>
     <% } %>
 
-    <h2>Games</h2>
-    <p>
-        <a href="/game/all" class="btn btn-info btn-md">
-            <span class="glyphicon glyphicon-refresh"></span> Refresh
-        </a>
-    </p>
-
     <div class="row">
         <div class="col-sm-4">
+            <h2>Games</h2>
             Local games are listed here<br><br>
             You can create new games or join currently listed onces
             <div id="message" style="display:none" class="alert alert-success">
@@ -41,75 +35,94 @@
             <div id="error" style="display:none" class="alert alert-danger">
                 <strong>Game successfully created</strong> Indicates a successful or positive action.
             </div>
+
+            <br><br><br>
+            <h3>Preferences</h3>
+            <form action="/game/search" method="get">
+                <div class="form-group">
+                    <label for="SkillLevel">Select Skill Level:</label>
+                    <select class="form-control" id="SkillLevel" name="SkillLevel">
+                        <option value='C'>Casual</option>
+                        <option value='M'>Moderate</option>
+                        <option value='S'>Serious</option>
+                    </select>
+                </div>
+                <input type="submit" value="Apply" class="btn btn-primary">
+                <a href="/game/all" class="btn btn-warning">Reset</a>
+
+            </form>
         </div>
-        <div class="col-sm-8">
+        <br><br><br>
+        <div class="col-sm-6">
             <% if(rs.length > 0) { %>
             <table class="table table-bordered">
                 <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Location</th>
-                        <th>Date</th>
-                        <th>Actions</th>
-                    </tr>
+                <tr>
+                    <th>Title</th>
+                    <th>Location</th>
+                    <th>Date</th>
+                    <th>Players</th>
+                    <th>Actions</th>
+                </tr>
                 </thead>
                 <% for (var i=0; rs.length > i; i++) { %>
                 <tbody>
-                    <tr>
-                        <td>
-                            <a href="/game?GameID=<%=rs[i].GameID%>"><%= rs[i].GameName %></a>
-                        </td>
-                        <td>
-                            <a href="/court?CourtID=<%= rs[i].CourtID %>"><%= rs[i].CourtName %></a>
-                        </td>
-                        <td>
-                            <%= rs[i].GameDateTime.substr(4, 2) %> /
-                            <%= rs[i].GameDateTime.substr(6, 2) %> /
-                            <%= rs[i].GameDateTime.substr(0, 4) %><br>
-                            <%= timeFormatter(rs[i].GameDateTime.substr(8, 4)) %>
-                        </td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
+                <tr>
+                    <td>
+                        <a href="/game?GameID=<%=rs[i].GameID%>"><%= rs[i].GameName %></a>
+                    </td>
+                    <td>
+                        <a href="/court?CourtID=<%= rs[i].CourtID %>"><%= rs[i].CourtName %></a>
+                    </td>
+                    <td>
+                        <%= rs[i].GameDateTime.substr(4, 2) %> /
+                        <%= rs[i].GameDateTime.substr(6, 2) %> /
+                        <%= rs[i].GameDateTime.substr(0, 4) %><br>
+                        <%= timeFormatter(rs[i].GameDateTime.substr(8, 4)) %>
+                    </td>
+                    <td>
+                        <%= rs[i].NumPlayers %>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
 
-                                    <% if(!inGame(rs, gr, i)) { %>
-                                    <li>
-                                        <button type="submit" class="btn btn-default"
-                                                onClick="joinGame(<%= rs[i].GameID %>)">Join Game</button>
-                                    </li>
-                                    <% } else if(rs[i].CreatorID != data.PlayerID) { %>
-                                    <li>
-                                        <button type="submit" class="btn btn-warning"
-                                           onClick="leaveGame(<%= rs[i].GameID %>)">Leave Game</button>
-                                    </li>
-                                    <% } %>
+                                <% if(!inGame(rs, gr, i)) { %>
+                                <li>
+                                    <button type="submit" class="btn btn-default"
+                                            onClick="joinGame(<%= rs[i].GameID %>)">Join Game</button>
+                                </li>
+                                <% } else if(rs[i].CreatorID != data.PlayerID) { %>
+                                <li>
+                                    <button type="submit" class="btn btn-warning"
+                                            onClick="leaveGame(<%= rs[i].GameID %>)">Leave Game</button>
+                                </li>
+                                <% } %>
 
-                                    <% if(rs[i].CreatorID == data.PlayerID) { %>
-                                    <li>
-                                        <button type="submit" class="btn btn-danger"
+                                <% if(rs[i].CreatorID == data.PlayerID) { %>
+                                <li>
+                                    <button type="submit" class="btn btn-danger"
                                             onClick="deleteGame(<%= rs[i].GameID %>)">Delete Game</button>
-                                    </li>
-                                    <% } %>
+                                </li>
+                                <% } %>
 
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
                 </tbody>
                 <% } %>
             </table>
 
             <% } else { %>
-            No movies exist.
+            No games exist
             <% } %>
-            <a href="/game/create" type="button" class="btn btn-primary">Create New Game</a>
+            <br><a href="/game/create" type="button" class="btn btn-primary">Create New Game</a>
         </div>
     </div>
-
-
 </div>
 
 <% include ../partials/footer.ejs %>

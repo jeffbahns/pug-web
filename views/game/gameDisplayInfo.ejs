@@ -18,7 +18,8 @@
         <%= rs[0].GameDateTime.substr(6, 2) %> /
         <%= rs[0].GameDateTime.substr(0, 4) %><br>
         Duration: <%= rs[0].GameDuration %> hour(s)<br>
-        Creator: <a href="/player/?PlayerID=<%= rs[0].CreatorID %>"><%= cr[0].Username %></a>
+        Creator: <a href="/player/?PlayerID=<%= rs[0].CreatorID %>"><%= cr[0].Username %></a><br>
+        Skill Level: <%= rs[0].SkillLevel %>
     </p>
     </div>
 

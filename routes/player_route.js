@@ -12,8 +12,14 @@ router.get('/', function(req, res) {
             if(err) {
                 res.send(err);
             }
-            load_user_and_render(req, res, 'player/playerDisplayInfo.ejs',
-                {rs: result, PlayerID: req.query.PlayerID, gr: result2});
+            playerDal.GetFriendsByID(req.session.account.PlayerID, function(err, result3) {
+                if(err) {
+                    res.send(err);
+                }
+                load_user_and_render(req, res, 'player/playerDisplayInfo.ejs',
+                    {rs: result, PlayerID: req.query.PlayerID, gr: result2, fr: result3[0]});
+            });
+
         });
     });
 });

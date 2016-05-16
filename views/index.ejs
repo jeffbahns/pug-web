@@ -3,16 +3,46 @@
 
 
 <div class="container">
-    <% if(typeof data.first_name == "undefined") { %>
-    <div class="col-sm-8">
-        <div class="jumbotron" style="background-color:#67b168;">
-            <h1>Sixth Man</h1>
-            <h2><a href="/authenticate?Username=jeffbahns&Password=jjj">LOGIN</a></h2>
-            <p>Find and create pick-up games with basketball players in your area</p>
+    <div class="row">
+        <% if(typeof data.first_name == "undefined") { %>
+        <div class="col-sm-8">
+            <div class="jumbotron" style="background-color:#67b168;">
+                <h1>Sixth Man</h1>
+                <h2><a href="/authenticate?Username=jeffbahns&Password=jjj">LOGIN</a></h2>
+                <p>Find and create pick-up games with basketball players in your area</p>
+            </div>
         </div>
+        <% include partials/login_partial.ejs %>
+        <% } else { %>
+        <div class="col-sm-12">
+            <div class="jumbotron" style="background-color:#67b168;" align="center">
+                <h1>Sixth Man</h1>
+                <p>Find and create pick-up games with basketball players in your area</p>
+            </div>
+
+        </div>
+        <% } %>
     </div>
-    <% include partials/login_partial.ejs %>
-    <% } %>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="jumbotron" align="left">
+                <h2>Create And Join Games</h2>
+                <p>Games in Sixth Man allow you to organize pick-up games with other players
+                </p>
+                <br><br>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <h2>Meet Other Local Basketball Players</h2>
+                <p>As a social application, Sixth Man
+                    connects people together, easier
+                </p>
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
 <% include partials/footer.ejs %>
