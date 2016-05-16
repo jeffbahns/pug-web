@@ -1,7 +1,8 @@
 <% var js_includes = ['https://code.juery.com/jquery-1.12.3.min.js',
         '/javascripts/join_game_ajax.js',
         '/javascripts/leave_game_ajax.js',
-        '/javascripts/delete_game_ajax.js'
+        '/javascripts/delete_game_ajax.js',
+        '/javascripts/games_ajax.js'
 ]%>
 <% include ../partials/header.ejs %>
 
@@ -47,9 +48,8 @@
                         <option value='S'>Serious</option>
                     </select>
                 </div>
-                <input type="submit" value="Apply" class="btn btn-primary">
-                <a href="/game/all" class="btn btn-warning">Reset</a>
-
+                <input type="submit" value="Apply" class="btn btn-default">
+                <a href="/game/all" class="btn btn-default">Reset</a>
             </form>
         </div>
         <br><br><br>
@@ -84,7 +84,7 @@
                         <%= rs[i].NumPlayers %>
                     </td>
                     <td>
-                        <div class="dropdown">
+                        <div class="dropdown" align="center">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                                 <span class="caret"></span>
                             </button>

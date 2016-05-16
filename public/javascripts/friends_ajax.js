@@ -13,11 +13,13 @@ var addFriend = function(FriendID) {
                 $('#message').html(data.responseJSON.message);
                 $('#error').hide();
                 $('#message').show();
+                $('#AddFriend' + FriendID).hide();
+                $('#RemoveFriend' + FriendID).show();
+
             }
             else {
                 $('#error').html(data.responseJSON.error);
                 $('#message').hide();
-
                 $('#error').show();
             }
         }
@@ -39,11 +41,12 @@ var removeFriend = function(FriendID) {
                 $('#message').html(data.responseJSON.message);
                 $('#error').hide();
                 $('#message').show();
+                $('#RemoveFriend' + FriendID).hide();
+                $('#AddFriend' + FriendID).show();
             }
             else {
                 $('#error').html(data.responseJSON.error);
                 $('#message').hide();
-
                 $('#error').show();
             }
         }

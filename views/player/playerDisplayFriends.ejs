@@ -5,12 +5,6 @@
 <% include ../partials/header.ejs %>
 
 <div class="container">
-    <div id="message" style="display:none" class="alert alert-success">
-        <strong>Success!</strong> Indicates a successful or positive action.
-    </div>
-    <div id="error" style="display:none" class="alert alert-warning">
-        <strong>Success!</strong> Indicates a successful or positive action.
-    </div>
     <div class="col-sm-8">
         <h2>Friends List</h2>
         <% if(rs.length > 0) { %>
@@ -22,8 +16,12 @@
             <% for (var i=0; rs.length > i; i++) { %>
             <tbody>
             <tr>
-                <td><a href="/player?PlayerID=<%= rs[i].FriendID %>"><%= rs[i].Username %></a></td>
-                <td><button type="submit" class="btn btn-primary" onClick="removeFriend(<%= rs[i].FriendID %>)">Delete</button>
+                <td>
+                    <a href="/player?PlayerID=<%= rs[i].FriendID %>"><%= rs[i].Username %></a>
+                </td>
+                <td>
+                    <button type="submit" id="RemoveFriend<%= rs[i].FriendID %>" class="btn btn-danger" onClick="removeFriend(<%= rs[i].FriendID %>)">Remove Friend</button>
+                    <button type="submit" style="display:none" id="AddFriend<%= rs[i].FriendID %>" class="btn btn-primary" onClick="addFriend(<%= rs[i].FriendID %>)">Add Friend</button>
                 </td>
             </tr>
             </tbody>
@@ -33,6 +31,14 @@
         <% } else { %>
         No friends added yet
         <% } %>
+    </div>
+    <div class="col-sm-4">
+        <div id="message" style="display:none" class="alert alert-success">
+            <strong>Success!</strong> Indicates a successful or positive action.
+        </div>
+        <div id="error" style="display:none" class="alert alert-warning">
+            <strong>Success!</strong> Indicates a successful or positive action.
+        </div>
     </div>
 
 </div>

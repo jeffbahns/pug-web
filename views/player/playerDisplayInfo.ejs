@@ -22,16 +22,18 @@
             <% if(rs[0].PlayerID == data.PlayerID) { %>
             <a type="button" href="/logout">Log out</a>
             <% } else if(!isFriend(fr, rs[0].PlayerID)) { %>
-            <a type="button" onClick="addFriend(<%= rs[0].PlayerID %>)">Add Friend</a>
+            <a type="button" class="btn btn-primary" id="AddFriend<%= rs[0].PlayerID %>" onClick="addFriend(<%= rs[0].PlayerID %>)">Add Friend</a>
+            <a type="button" style="display:none" class="btn btn-danger" id="RemoveFriend<%= rs[0].PlayerID %>" onClick="removeFriend(<%= rs[0].PlayerID %>)">Remove Friend</a>
             <% } else { %>
-            <a type="button" onClick="removeFriend(<%= rs[0].PlayerID %>)">Remove Friend</a>
+            <a type="button" style="display:none" class="btn btn-primary" id="AddFriend<%= rs[0].PlayerID %>" onClick="addFriend(<%= rs[0].PlayerID %>)">Add Friend</a>
+            <a type="button" id="RemoveFriend<%= rs[0].PlayerID %>" class="btn btn-danger" onClick="removeFriend(<%= rs[0].PlayerID %>)">Remove Friend</a>
             <% } %>
 
             <div id="message" style="display:none" class="alert alert-success">
                 <strong>Success!</strong> Indicates a successful or positive action.
             </div>
             <div id="error" style="display:none" class="alert alert-warning">
-                <strong>Success!</strong> Indicates a successful or positive action.
+                <strong>Error!</strong> Indicates a successful or positive action.
             </div>
         </div>
     </div>
