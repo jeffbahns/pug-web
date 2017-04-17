@@ -10,6 +10,7 @@ var routes = require('./routes/index');
 var game = require('./routes/game_route');
 var player = require('./routes/player_route');
 var court = require('./routes/court_route');
+var api = require('./routes/api_route');
 
 var app = express();
 
@@ -47,10 +48,10 @@ function restrict(req, res, next){
     */
 }
 
-//app.use('/game', restrict, game);
-app.use('/game', game);
+app.use('/game', restrict, game);
 app.use('/player', restrict, player);
 app.use('/court', restrict, court);
+app.use('/api', api);
 
 
 // catch 404 and forward to error handler
