@@ -31,16 +31,24 @@ app.use(session(
 ));
 
 app.use('/', routes);
+
 function restrict(req, res, next){
     if(req.session.account) { //check if user is authenticated yet
         next();  //user logged in so proceed to requested page
     }
     else {
+        next();
+    }
+    /* disabled user auth
+    else {
         req.session.originalUrl = req.originalUrl;
         res.redirect('/login');  // they aren't so ask them to login
     }
+    */
 }
-app.use('/game', restrict, game);
+
+//app.use('/game', restrict, game);
+app.use('/game', game);
 app.use('/player', restrict, player);
 app.use('/court', restrict, court);
 
