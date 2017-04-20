@@ -29,6 +29,7 @@ router.get('/authenticate', function(req, res) {
         else {
             req.session.account = account;
             response.message = "Logged in successfully";
+            response.user = account;
         }
         res.json(response);
     });
