@@ -93,6 +93,7 @@ exports.GetByPlayerID = function(PlayerID, callback) {
 exports.GetByCourtID = function(CourtID, callback) {
     query = 'SELECT * FROM game\n'
         + 'JOIN court ON court.CourtID = game.CourtID\n'
+        + 'JOIN player ON player.PlayerID = game.CreatorID\n'
         + 'WHERE court.CourtID = ' + CourtID + ';';
 
     console.log(query);

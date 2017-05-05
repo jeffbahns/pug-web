@@ -67,3 +67,21 @@ exports.Insert = function(court_info, callback) {
             callback(false, result);
         });
 };
+
+exports.GetAllWithinRadius = function(origin_lat, origin_lon, radius, callback) {
+    query = 'CALL geodist('
+        + origin_lat + ','
+        + origin_lon + ','
+        + radius + ');';
+    console.log(query);
+    connection.query(query,
+        function(err, result) {
+            if(err) {
+                console.log(err);
+                callback(true);
+                return;
+            }
+            console.log(result);
+            callback(false, result);
+        });
+};

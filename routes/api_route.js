@@ -10,18 +10,11 @@ router.get('/authenticate', function(req, res) {
     accountDal.GetByUsername(req.query.Username, req.query.Password, function(err, account) {
         result = []
         response = {};
-        if(err) {
-            res.send(err);
-        }
-        if (err) {
-            response.error = err.message;
-        }
-        else if (account == null) {
-            response.error = "Account not found";
+        if (account == null) {
+            response.response = "fail";
         }
         else {
-            req.session.account = account;
-            response.message = "Logged in successfully";
+            response.response = "pass";
             response.user = account;
         }
         result.push(response);
@@ -55,5 +48,24 @@ router.get('/all_players', function(req, res) {
         res.json(result);
     });
 });
+
+router.get('/courts', function(req, res) {
+    courtDal.GetAllWithinRadius(req.query.origin_lat, req.query.origin_long, req.query.radius, function(err, result) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(result[0]);
+    });
+});
+
+router.get('/games_in_court', function(req, res) {
+    gameDal.GetByCourtID(req.query.CourtID, function(err, result) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(result);
+    })
+});
+
 
 module.exports = router;
