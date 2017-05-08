@@ -17,7 +17,7 @@ router.get('/authenticate', function(req, res) {
             response.response = "pass";
             response.user = account;
         }
-        result.push(response);
+        result.push(response["user"]);
         res.json(result);
     });
 });
