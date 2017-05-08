@@ -8,7 +8,7 @@ router.get('/authenticate', function(req, res) {
     console.log(req.body);
     console.log(req.query);
     accountDal.GetByUsername(req.query.Username, req.query.Password, function(err, account) {
-        result = []
+        result = [];
         response = {};
         if (account == null) {
             response.response = "fail";
