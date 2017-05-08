@@ -67,5 +67,22 @@ router.get('/games_in_court', function(req, res) {
     })
 });
 
+router.get('/players_in_game', function(req, res) {
+    playerDal.GetPlayersByGameID(req.query.GameID, function(err, result) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(result[0]);
+    })
+});
+
+router.get('/player_by_id', function(req, res) {
+    playerDal.GetByID(req.query.PlayerID, function(err, result) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(result);
+    });
+});
 
 module.exports = router;

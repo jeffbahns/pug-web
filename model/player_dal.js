@@ -97,3 +97,18 @@ exports.GetCreatorByGameID = function(GameID, callback) {
             callback(false, result);
         });
 };
+
+exports.GetPlayersByGameID = function(GameID, callback) {
+    query = 'CALL players_in_game(' + GameID + ');';
+    console.log(query);
+    connection.query(query,
+        function(err, result) {
+            if(err) {
+                console.log(err);
+                callback(true);
+                return;
+            }
+            console.log(result);
+            callback(false, result);
+        });
+};
