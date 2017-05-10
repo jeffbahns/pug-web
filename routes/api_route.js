@@ -129,5 +129,19 @@ router.get('/insert_game', function(req, res) {
     });
 });
 
+router.get('/join_game', function(req, res) {
+    gameDal.JoinGame(req.query.PlayerID, req.query.GameID, function (err, result) {
+        result = [];
+        response = {};
+        if (err) {
+         i   response.error = err.message;
+        }
+        else {
+            response.message = "Joined successfully";
+        }
+        result.push(response);
+        res.json(result);
+    });
+});
 
 module.exports = router;
