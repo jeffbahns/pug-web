@@ -85,4 +85,47 @@ router.get('/player_by_id', function(req, res) {
     });
 });
 
+router.get('/insert_user', function(req, res) {
+    console.log(req.query);
+    accountDal.InsertNewUser(req.query.Username, req.query.Password, req.query.FirstName,
+        req.query.LastName, req.query.PhoneNumber, req.query.Age, function(err, result) {
+            response = {};
+            if (err) {
+                response.error = err.message;
+            }
+            else {
+                response.message = "You successfully signed up for Sixth Man";
+            }
+            res.json(response);
+        });
+});
+
+router.get('/insert_court', function(req, res) {
+    console.log(req.query);
+    courtDal.Insert(req.query, function(err, result) {
+        response = {};
+        if(err) {
+            response.message = "Court creation unsuccessful";
+        } else {
+            response.message = "Court successfully created";
+        }
+        res.json(response);
+    });
+});
+
+router.get('/insert_game', function(req, res) {
+    console.log(req.query);
+    gameDal.Insert(req.query.CreatorID, req.query, function(err, result) {
+        response = {};
+        if(err) {
+            response.error = err + "\nGame creation unsuccessful";
+        }
+        else {
+            response.message = "Game successfully created, have fun!";
+        }
+        res.json(response);
+    });
+});
+
+
 module.exports = router;

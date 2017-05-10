@@ -49,7 +49,9 @@ exports.GetRatingsByID = function(CourtID, callback) {
 };
 
 exports.Insert = function(court_info, callback) {
-    query = 'INSERT INTO court(CourtName, Address, City, State, ZipCode) VALUES ('
+    query = 'INSERT INTO court(Latitude, Longitude, CourtName, Address, City, State, ZipCode) VALUES ('
+        + '\'' + court_info.Latitude + ', '
+        + '\'' + court_info.Longitude + ', '
         + '\'' + court_info.CourtName + '\', '
         + '\'' + court_info.Address + '\', '
         + '\'' + court_info.City + '\', '

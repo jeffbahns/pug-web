@@ -24,8 +24,8 @@ exports.GetByUsername = function(username, password, callback) {
 };
 
 exports.InsertNewUser = function(Username, Password, FirstName, LastName, PhoneNumber, Age, callback) {
-    var query = 'INSERT INTO player(Username, Password, FirstName, LastName, PhoneNumber, Age)' +
-        'VALUES (?, ?, ?, ?, ?, ?)';
+    var query = 'INSERT INTO player(Username, Password, FirstName, LastName, PhoneNumber, Age,Image)' +
+        'VALUES (?, ?, ?, ?, ?, ?, NULL)';
     var query_data = [Username, Password, FirstName, LastName, PhoneNumber, Age];
     console.log(query, query_data);
     connection.query(query, query_data, function(err, result) {
