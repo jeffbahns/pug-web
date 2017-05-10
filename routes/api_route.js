@@ -116,6 +116,7 @@ router.get('/insert_court', function(req, res) {
 router.get('/insert_game', function(req, res) {
     console.log(req.query);
     gameDal.Insert(req.query.CreatorID, req.query, function(err, result) {
+        result = [];
         response = {};
         if(err) {
             response.error = err + "\nGame creation unsuccessful";
@@ -123,7 +124,8 @@ router.get('/insert_game', function(req, res) {
         else {
             response.message = "Game successfully created, have fun!";
         }
-        res.json(response);
+        result.push(response);
+        res.json(result);
     });
 });
 
